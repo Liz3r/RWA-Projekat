@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
 import { UserService } from 'src/user/user.service';
@@ -19,14 +19,12 @@ export class AuthService {
         let user = await this.userService.findOneByEmail(email);
         
         if(!user){
-            return null;
+            throw new HttpException('User with given name does not exist', 404);
         }
 
-        const salt = await bcrypt.genSalt(10);
         const isCorrect = await bcrypt.compare(password, user.user_password);
-        
         if(!isCorrect)
-            return null;
+            throw new HttpException('Invalid password', 401);
         
         const payload = { id: user.id ,email: user.user_email};
         return {

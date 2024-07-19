@@ -13,7 +13,7 @@ import { User } from './user/entities/user.entity';
       port: 3306,
       host: 'localhost',
       username: 'root',
-      password: 'admn',
+      password: 'admin',
       database: 'rwadb',
       entities: [User],
       synchronize: true
