@@ -14,6 +14,7 @@ export class UserService {
     private readonly userRepository: Repository<User>
   ){}
 
+
   async create(createUserDto: CreateUserDto) {
     
     const getUser = this.userRepository.findOneBy({user_email: createUserDto.user_email})
@@ -22,9 +23,8 @@ export class UserService {
     const password = createUserDto.user_password;
     const hashPassword = await bcrypt.hash(password, salt);
 
-    //provera da li neko sa tim emailom postoji
-
     getUser.then( user => {
+
       if(user)
         throw new HttpException('User already exists', 409);
 

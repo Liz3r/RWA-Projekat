@@ -2,19 +2,18 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, Validation
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import * as bicrypt from 'bcrypt';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
 
-  @Post('create')
+  @Post('register')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
 
-  @Get()
+  @Get('allUsers')
   findAll() {
     return this.userService.findAll();
   }

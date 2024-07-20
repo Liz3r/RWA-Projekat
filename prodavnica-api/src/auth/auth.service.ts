@@ -17,10 +17,8 @@ export class AuthService {
     public async signIn(email: string, password: string){
 
         let user = await this.userService.findOneByEmail(email);
-        
-        if(!user){
+        if(!user)
             throw new HttpException('User with given name does not exist', 404);
-        }
 
         const isCorrect = await bcrypt.compare(password, user.user_password);
         if(!isCorrect)
@@ -28,7 +26,7 @@ export class AuthService {
         
         const payload = { id: user.id ,email: user.user_email};
         return {
-            access_token: this.jwtService.signAsync(payload)
+            access_token: await this.jwtService.signAsync(payload)
         }
     }
 }
