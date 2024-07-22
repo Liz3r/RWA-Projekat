@@ -1,27 +1,39 @@
 <div class="register-container">
 
-    <h1>Register</h1>
-    <form class="form-group" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <h1 class="register-title">Create account</h1>
 
-        <label for="email">Email</label>
-        <input id="email" type="text" formControlName = "email">
-        <label for="password">Password</label>
-        <input id="password" type="text" formControlName = "password">
-        <label for="rPassword">Repeat password</label>
-        <input id="rPassword" type="text" formControlName = "rPassword">
+        <div class="row">
+            <div class="label-input-form">
+                <label for="firstName">First name</label>
+                <input id="firstName" type="text" formControlName = "firstName">
+            </div>
+            
+            <div class="label-input-form">
+                <label for="lastName">Last name</label>
+                <input id="lastName" type="text" formControlName = "lastName">
+            </div>
+        </div>
 
-        <label for="firstName">First name</label>
-        <input id="firstName" type="text" formControlName = "firstName">
-        <label for="lastName">Last name</label>
-        <input id="lastName" type="text" formControlName = "lastName">
+        <div class="row">
+            <div class="label-input-form">
+                <label for="email">Email</label>
+                <input id="email" type="text" formControlName = "email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="label-input-form">
+                <label for="password">Password</label>
+                <input id="password" type="password" formControlName = "password">
+            </div>
+        </div>
+        <div class="row">
+            <div class="label-input-form">
+                <label for="rPassword">Repeat password</label>
+                <input id="rPassword" type="password" formControlName = "rPassword">
+            </div>
+        </div>
         
-        <label for="phoneNumber">Phone number</label>
-        <input id="phoneNumber" type="text" formControlName = "phoneNumber">
-        <label for="country">Country</label>
-        <input id="country" type="text" formControlName = "country">
-        <label for="city">City</label>
-        <input id="city" type="text" formControlName = "city">
-        
-        <button type="submit">Register</button>
+        <button class="btn wide btn-orange submit-registration-btn" type="submit">Register</button>
     </form>
 </div>

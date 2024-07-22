@@ -35,20 +35,24 @@ export class User {
     bio: string;
 
     @Column({
-        nullable: false,
+        nullable: true,
         length: 20
     })
     phone_number: string;
 
     @Column({
-        nullable: false,
+        nullable: true,
         length: 20
     })
     country: string;
 
     @Column({
-        nullable: false,
+        nullable: true,
         length: 20
     })
     city: string;
+    @Column({
+        nullable: true
+    })
+    address: string;
 }

@@ -33,9 +33,6 @@ export class UserService {
       newUser.user_password = hashPassword;
       newUser.first_name = createUserDto.first_name;
       newUser.last_name = createUserDto.last_name;
-      newUser.phone_number = createUserDto.phone_number;
-      newUser.country = createUserDto.country;
-      newUser.city = createUserDto.city;
       
       const createdUser = this.userRepository.create(newUser);
       return this.userRepository.save(createdUser);

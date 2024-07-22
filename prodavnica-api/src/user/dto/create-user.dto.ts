@@ -13,13 +13,4 @@ export class CreateUserDto {
 
     @IsNotEmpty()
     readonly last_name: string;
-
-    @IsNotEmpty()
-    readonly phone_number: string;
-
-    @IsNotEmpty()
-    readonly country: string;
-
-    @IsNotEmpty()
-    readonly city: string;
 }

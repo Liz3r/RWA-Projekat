@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -9,14 +9,24 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class RegisterComponent {
 
   registerForm = new FormGroup({
-    email: new FormControl<string | null>(''),
-    password: new FormControl<string | null>(''),
-    rPassword: new FormControl<string | null>(''),
-    firstName: new FormControl<string | null>(''),
-    lastName: new FormControl<string | null>(''),
-    phoneNumber: new FormControl<string | null>(''),
-    country: new FormControl<string | null>(''),
-    city: new FormControl<string | null>('')
+    email: new FormControl<string | null>('', [
+      Validators.required
+    ]),
+    password: new FormControl<string | null>('', [
+      Validators.required
+    ]),
+    rPassword: new FormControl<string | null>('', [
+      Validators.required
+    ]),
+    firstName: new FormControl<string | null>('', [
+      Validators.required
+    ]),
+    lastName: new FormControl<string | null>('', [
+      Validators.required
+    ]),
+    address: new FormControl<string | null>('', [
+      Validators.required
+    ])
   })
 
 
