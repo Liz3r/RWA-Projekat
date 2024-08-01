@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, Validation
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { SkipAuth } from 'src/auth/constants';
 
 @Controller('user')
 export class UserController {
@@ -10,6 +11,7 @@ export class UserController {
 
   @Post('register')
   create(@Body() createUserDto: CreateUserDto) {
+    console.log("from API");
     return this.userService.create(createUserDto);
   }
 

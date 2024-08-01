@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { matchPasswords } from '../../../helpers/customValidators';
 import { checkErrors } from '../../../helpers/validationErrorMessage';
-import { CreateUserDto } from '../../dtos';
+import { CreateUserDto } from '../../dtos/create-user.dto';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -65,7 +65,8 @@ export class RegisterComponent {
       
       if(first_name && last_name && user_email && user_password){
         const user: CreateUserDto = { first_name, last_name, user_email, user_password };
-        //this.userService.register(user);
+        console.log('calling service');
+        this.userService.register(user);
       }
     }
   }

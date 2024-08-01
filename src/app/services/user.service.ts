@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { CreateUserDto } from '../dtos';
+import { CreateUserDto } from '../dtos/create-user.dto';
 import { API_URL } from '../env';
 
 @Injectable({
@@ -15,6 +15,7 @@ export class UserService {
   ) { }
 
   register(createUserDto: CreateUserDto){
-    return this.http.post(`${API_URL}/user/register`, createUserDto);
+    console.log('service called' + createUserDto);
+    return this.http.post(`${API_URL}/user/register`, createUserDto, { withCredentials: true });
   }
 }
