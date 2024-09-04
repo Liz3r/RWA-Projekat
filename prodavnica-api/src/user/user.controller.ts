@@ -8,7 +8,7 @@ import { SkipAuth } from 'src/auth/constants';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-
+  @SkipAuth()
   @Post('register')
   create(@Body() createUserDto: CreateUserDto) {
     console.log("from API");

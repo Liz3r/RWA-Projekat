@@ -66,7 +66,9 @@ export class RegisterComponent {
       if(first_name && last_name && user_email && user_password){
         const user: CreateUserDto = { first_name, last_name, user_email, user_password };
         console.log('calling service');
-        this.userService.register(user);
+        this.userService.register(user).subscribe(res => {
+          console.log(res);
+        });
       }
     }
   }
