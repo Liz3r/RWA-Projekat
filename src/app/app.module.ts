@@ -9,18 +9,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { ServerErrorInterceptor } from './interceptors/server-error.interceptor';
+import { serverErrorReducer } from './store/server-errors.reducer';
+import { ServerErrorComponent } from './components/server-error/server-error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ServerErrorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({})
+    StoreModule.forRoot({serverError: serverErrorReducer})
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

@@ -15,7 +15,6 @@ export class UserService {
   ) { }
 
   register(createUserDto: CreateUserDto){
-    console.log({...createUserDto});
     return this.http.post(`${API_URL}/user/register`, createUserDto, { withCredentials: true });
   }
 }
