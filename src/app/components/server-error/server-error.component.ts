@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { selectCurrentErrorMessage } from '../../store/server-errors.selector';
 import { AppState } from '../../store/app-state';
+import { filter, of } from 'rxjs';
+import { ErrorState } from '../../store/server-errors.reducer';
 
 @Component({
   selector: 'app-server-error',
@@ -11,16 +13,12 @@ import { AppState } from '../../store/app-state';
 })
 export class ServerErrorComponent implements OnInit{
 
-  error$ = new Observable<string>();
+  error$: Observable<string | null> = of(null);
 
   constructor(private store: Store<AppState>){}
 
   ngOnInit(): void {
     this.error$ = this.store.select(selectCurrentErrorMessage);
   }
-
-  
-
-  
 
 }

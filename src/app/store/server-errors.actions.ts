@@ -7,4 +7,4 @@ export const setError = createAction(
 
 export const clearError = createAction(
     '[Interceptor] Clear Error'
-)
+);

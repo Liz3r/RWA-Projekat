@@ -2,17 +2,17 @@ import { createReducer, on } from "@ngrx/store";
 import * as Actions from "./server-errors.actions";
 
 export interface ErrorState{
-    status: number;
-    message: string;
+    status: number | null;
+    message: string | null;
 }
 
 export const InitialErrorState: ErrorState = {
-    status: 200,
-    message: ""
+    status: 0,
+    message: ''
 };
 
 export const serverErrorReducer = createReducer(
     InitialErrorState,
-    on(Actions.setError, (state, {status, message}) => {return {status: status, message: message}}),
-    on(Actions.clearError, state => {return {status: 200, message: ""}})
+    on(Actions.setError, (state, {status, message}) => ({...state, status: status, message: message})),
+    on(Actions.clearError, state => ({...state, status: null, message: null}))
 )

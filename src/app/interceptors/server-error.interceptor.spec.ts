@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpInterceptorFn } from '@angular/common/http';
+import { HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 
-import { serverErrorInterceptor } from './server-error.interceptor';
 
 describe('serverErrorInterceptor', () => {
   const interceptor: HttpInterceptorFn = (req, next) => 
@@ -15,3 +14,7 @@ describe('serverErrorInterceptor', () => {
     expect(interceptor).toBeTruthy();
   });
 });
+function serverErrorInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): any {
+  throw new Error('Function not implemented.');
+}
+

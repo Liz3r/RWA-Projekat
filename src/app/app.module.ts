@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { ServerErrorInterceptor } from './interceptors/server-error.interceptor';
 import { serverErrorReducer } from './store/server-errors.reducer';
 import { ServerErrorComponent } from './components/server-error/server-error.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,10 @@ import { ServerErrorComponent } from './components/server-error/server-error.com
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({serverError: serverErrorReducer})
+    StoreModule.forRoot({serverErrors: serverErrorReducer}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
+    })
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
