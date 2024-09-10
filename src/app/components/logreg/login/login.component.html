@@ -1,16 +1,26 @@
 
 <div class="logreg-container">
-    <form class="logreg-form">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="logreg-form">
         <h1 class="logreg-title">Login</h1>
-        <div class="label-input-form">
-            <label for="email">Email</label>
-            <input id="email" type="text"/>
+        <div class="row">
+            <div class="label-input-form">
+                <label for="email">Email</label>
+                <input id="email" type="text"/>
+            </div>
         </div>
-        <div class="label-input-form">
-            <label for="password">Password</label>
-            <input id="password" type="password"/>
+        <div class="row">
+            <div class="label-input-form">
+                <label for="password">Password</label>
+                <input id="password" type="password"/>
+            </div>
         </div>
 
+        <div class="error-div">
+            <div class="error-msg" *ngIf="errorMsg">{{errorMsg}}</div>
+            <app-server-error></app-server-error>
+        </div>
+        <button class="btn btn-green wide login-btn" type="submit">Login</button>
+        <a routerLink="/account/register" class="logreg">click here to crate account</a>
     </form>
 </div>
 
