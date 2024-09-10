@@ -1,7 +1,7 @@
-<div class="register-container">
+<div class="logreg-container">
 
-    <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <h1 class="register-title">Create account</h1>
+    <form class="logreg-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <h1 class="logreg-title">Create account</h1>
 
         <div class="row">
             <div class="label-input-form">
@@ -33,9 +33,11 @@
                 <input id="rPassword" type="password" formControlName = "rPassword">
             </div>
         </div>
-        
-        <div class="error-msg">{{errorMsg}}</div>
-        <app-server-error></app-server-error>
+
+        <div class="error-div">
+            <div class="error-msg" *ngIf="errorMsg">{{errorMsg}}</div>
+            <app-server-error></app-server-error>
+        </div>
         <button class="btn wide btn-orange submit-registration-btn" type="submit">Register</button>
     </form>
 </div>

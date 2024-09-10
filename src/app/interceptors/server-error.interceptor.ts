@@ -16,10 +16,13 @@ export class ServerErrorInterceptor implements HttpInterceptor{
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
     
     return next.handle(req).pipe(
+      map((response) => {
+        if(response instanceof HttpResponse && ((response as HttpResponse<any>).ok))
+          this.store.dispatch(Actions.clearError());
+      }),
       catchError((response: HttpErrorResponse) => {
       if(response.status !== 200)
         this.store.dispatch(Actions.setError({status: response.status, message: response.error.message}));
-      console.log(response);
       return of(response);
     }))
   }
