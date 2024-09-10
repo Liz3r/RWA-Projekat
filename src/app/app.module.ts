@@ -12,7 +12,8 @@ import { ServerErrorInterceptor } from './interceptors/server-error.interceptor'
 import { serverErrorReducer } from './store/server-errors.reducer';
 import { ServerErrorComponent } from './components/server-error/server-error.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { LogregComponent } from './components/logreg/logreg.component'
+import { LogregComponent } from './components/logreg/logreg.component';
+import { AuthenticatedComponent } from './components/authenticated/authenticated.component'
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { LogregComponent } from './components/logreg/logreg.component'
     RegisterComponent,
     ServerErrorComponent,
     LogregComponent,
+    AuthenticatedComponent,
   ],
   imports: [
     BrowserModule,
