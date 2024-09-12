@@ -39,7 +39,9 @@ export class LoginComponent {
       const password = this.loginForm.get('password')?.value;
       if(email && password){
         const signInDto: SignInDto = {user_email: email, user_password: password};
-        this.authService.login(signInDto).subscribe((res)=> console.log(res));
+        this.authService.login(signInDto).subscribe((res)=> {
+          console.log(res);
+        });
       }
     }
   }

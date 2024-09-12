@@ -1,7 +1,8 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SkipAuth } from './constants';
 import { SignInDto } from 'src/user/dto/signIn.dto';
+import { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -13,7 +14,9 @@ export class AuthController {
     @SkipAuth()
     @HttpCode(HttpStatus.OK)
     @Post('login')
-    signIn(@Body() signInDto: SignInDto){
-        return this.authService.signIn(signInDto.user_email, signInDto.user_password);
+    async signIn(@Body() signInDto: SignInDto, @Res({passthrough: true}) response: Response){
+        const res = await this.authService.signIn(signInDto.user_email, signInDto.user_password);
+        response.cookie('jwt', res.token);
+        response.send(res);
     }
 }
