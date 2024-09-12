@@ -41,9 +41,9 @@ export class UserService {
       newUser.phone_number = 'null';
       
       const createdUser = this.userRepository.create(newUser);
-      return this.userRepository.save(createdUser);
+      await this.userRepository.save(createdUser);
     
-
+      return {message: 'User created'};
   }
 
   findAll() {
@@ -55,7 +55,9 @@ export class UserService {
   }
 
   findOneByEmail(email: string): Promise<User | undefined> {
-    return this.userRepository.findOneBy({ user_email: email });
+    if(email)
+      return this.userRepository.findOneBy({ user_email: email });
+    throw new HttpException('No email provided', HttpStatus.UNPROCESSABLE_ENTITY);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

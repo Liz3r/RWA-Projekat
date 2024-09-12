@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { checkErrors } from '../../../../helpers/validationErrorMessage';
+import { AuthService } from '../../../services/auth.service';
+import { SignInDto } from '../../../dtos/signIn.dto';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ import { checkErrors } from '../../../../helpers/validationErrorMessage';
 export class LoginComponent {
   
   constructor(
-    private userService: UserService
+    private authService: AuthService
   ){}
 
   errorMsg: string | null = null;
@@ -25,8 +27,7 @@ export class LoginComponent {
     password: new FormControl<string>('', [
       Validators.nullValidator,
       Validators.required,
-      Validators.maxLength(22),
-      
+      Validators.maxLength(22)
     ])
   }, [])
 
@@ -36,9 +37,10 @@ export class LoginComponent {
     if(!this.errorMsg){
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
-      
-     
-      
+      if(email && password){
+        const signInDto: SignInDto = {user_email: email, user_password: password};
+        this.authService.login(signInDto).subscribe((res)=> console.log(res));
+      }
     }
   }
 }

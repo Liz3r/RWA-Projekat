@@ -22,11 +22,15 @@ export class AuthService {
 
         const isCorrect = await bcrypt.compare(password, user.user_password);
         if(!isCorrect)
-            throw new HttpException('Invalid password', 401);
+            throw new HttpException('Invalid password', HttpStatus.UNAUTHORIZED);
         
         const payload = { id: user.id ,email: user.user_email};
+        const token = this.jwtService.sign(payload);
+
         return {
-            access_token: await this.jwtService.signAsync(payload)
+            user_id: user.id,
+            user_email: user.user_email,
+            token: token
         }
     }
 }

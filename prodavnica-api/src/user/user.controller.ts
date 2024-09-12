@@ -11,7 +11,8 @@ export class UserController {
   @SkipAuth()
   @Post('register')
   create(@Body() createUserDto: CreateUserDto) {
-     return this.userService.create(createUserDto);
+     const response = this.userService.create(createUserDto);
+     console.log(response);
   }
 
   @Get('allUsers')

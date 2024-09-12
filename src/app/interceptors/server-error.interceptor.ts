@@ -19,6 +19,7 @@ export class ServerErrorInterceptor implements HttpInterceptor{
       map((response) => {
         if(response instanceof HttpResponse && ((response as HttpResponse<any>).ok))
           this.store.dispatch(Actions.clearError());
+        return response;
       }),
       catchError((response: HttpErrorResponse) => {
       if(response.status !== 200)
