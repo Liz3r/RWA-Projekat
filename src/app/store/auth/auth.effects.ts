@@ -15,7 +15,6 @@ export class AuthEffects{
 
     login$ = createEffect(() =>
         this.actions$.pipe(
-            tap(() => {console.log("effect called")}),
             ofType(AuthActions.login),
             switchMap(({ username, password }) =>
                 this.authService.login(username, password).pipe(
@@ -26,11 +25,22 @@ export class AuthEffects{
                         first_name: res.user_firstname
                     };
                     user.id = res.user_id;
-                    return AuthActions.loginSuccess({user})})
+                    return AuthActions.loginSuccess({user})}),
+                    catchError(() => of(AuthActions.loginFailure()))
                 )
             )
             )
         );
     
-        
+    register$ = createEffect(() => 
+        this.actions$.pipe(
+            ofType(AuthActions.register),
+            switchMap(({createUserDto}) => 
+                this.authService.register(createUserDto).pipe(
+                    map(() => AuthActions.registerSuccess()),
+                    catchError(() => of(AuthActions.registerFailure()))
+                )
+            )
+        )
+    );
 }
