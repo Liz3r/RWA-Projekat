@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
-import { selectCurrentErrorMessage } from '../../store/server-errors.selector';
+import { selectCurrentErrorMessage } from '../../store/server-errors/server-errors.selector';
 import { AppState } from '../../store/app-state';
 import { filter, of } from 'rxjs';
-import { ErrorState } from '../../store/server-errors.reducer';
+import { ErrorState } from '../../store/server-errors/server-errors.reducer';
 
 @Component({
   selector: 'app-server-error',

@@ -9,11 +9,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { ServerErrorInterceptor } from './interceptors/server-error.interceptor';
-import { serverErrorReducer } from './store/server-errors.reducer';
+import { serverErrorReducer } from './store/server-errors/server-errors.reducer';
 import { ServerErrorComponent } from './components/server-error/server-error.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LogregComponent } from './components/logreg/logreg.component';
 import { AuthenticatedComponent } from './components/authenticated/authenticated.component'
+import { authReducer } from './store/auth/auth.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/auth/auth.effects';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,11 @@ import { AuthenticatedComponent } from './components/authenticated/authenticated
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({serverErrors: serverErrorReducer}),
+    StoreModule.forRoot({serverErrors: serverErrorReducer, auth: authReducer}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
+    }),
+    EffectsModule.forRoot([AuthEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     })

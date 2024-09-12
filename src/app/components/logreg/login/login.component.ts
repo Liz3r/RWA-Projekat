@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { checkErrors } from '../../../../helpers/validationErrorMessage';
-import { AuthService } from '../../../services/auth.service';
-import { SignInDto } from '../../../dtos/signIn.dto';
+import * as AuthActions from '../../../store/auth/auth.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ import { SignInDto } from '../../../dtos/signIn.dto';
 export class LoginComponent {
   
   constructor(
-    private authService: AuthService
+    private store: Store
   ){}
 
   errorMsg: string | null = null;
@@ -38,10 +38,7 @@ export class LoginComponent {
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
       if(email && password){
-        const signInDto: SignInDto = {user_email: email, user_password: password};
-        this.authService.login(signInDto).subscribe((res)=> {
-          console.log(res);
-        });
+        this.store.dispatch(AuthActions.login({username: email, password: password}));
       }
     }
   }

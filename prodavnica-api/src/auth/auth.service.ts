@@ -14,7 +14,7 @@ export class AuthService {
         private jwtService: JwtService
     ){}
     
-    public async signIn(email: string, password: string): Promise<{ user_id: number, user_email: string, token: string}>{
+    public async signIn(email: string, password: string): Promise<{ user_id: number, user_email: string,user_firstname:string, token: string}>{
 
         let user = await this.userService.findOneByEmail(email);
         if(!user)
@@ -30,6 +30,7 @@ export class AuthService {
         return {
             user_id: user.id,
             user_email: user.user_email,
+            user_firstname: user.first_name,
             token: token
         }
     }

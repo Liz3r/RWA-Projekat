@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable, of, tap } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import * as Actions from '../store/server-errors.actions';
+import * as Actions from '../store/server-errors/server-errors.actions';
 
 
 @Injectable()
