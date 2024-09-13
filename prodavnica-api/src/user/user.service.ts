@@ -54,7 +54,7 @@ export class UserService {
     return this.userRepository.findOneBy({ id })
   }
 
-  findOneByEmail(email: string): Promise<User | undefined> {
+  findOneByEmail(email: string): Promise<User> {
     if(email)
       return this.userRepository.findOneBy({ user_email: email });
     throw new HttpException('No email provided', HttpStatus.UNPROCESSABLE_ENTITY);

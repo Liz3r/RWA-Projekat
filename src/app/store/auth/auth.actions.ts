@@ -30,3 +30,16 @@ export const registerSuccess = createAction(
 export const registerFailure = createAction(
     '[Auth] Register Failure'
 )
+
+export const checkToken = createAction(
+    '[Auth] Check Token'
+)
+
+export const validToken = createAction(
+    '[Auth] Token Valid',
+    props<{user: User}>()
+)
+
+export const invalidToken = createAction(
+    '[Auth] Token Invalid'
+)

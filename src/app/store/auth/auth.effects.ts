@@ -24,7 +24,6 @@ export class AuthEffects{
                         user_email: res.user_email,
                         first_name: res.user_firstname
                     };
-                    user.id = res.user_id;
                     return AuthActions.loginSuccess({user})}),
                     catchError(() => of(AuthActions.loginFailure()))
                 )
@@ -43,4 +42,22 @@ export class AuthEffects{
             )
         )
     );
+
+    checkToken$ = createEffect(() => this.actions$.pipe(
+        ofType(AuthActions.checkToken),
+        switchMap(() => 
+            this.authService.checkToken().pipe(
+                map((res) => {
+                    const user: User = {
+                        id: res.user_id,
+                        user_email: res.user_email,
+                        first_name: res.user_firstname
+                    };
+                    console.log(res);
+                    return AuthActions.validToken({user});
+                }),
+                catchError(() => of(AuthActions.invalidToken()))
+            )
+        )
+    ))
 }
