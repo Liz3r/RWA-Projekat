@@ -2,15 +2,21 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { AuthService } from "../../services/auth.service";
 import * as AuthActions from "./auth.actions";
-import { catchError, map, of, switchMap, tap } from "rxjs";
+import { catchError, distinctUntilChanged, map, of, switchMap, tap } from "rxjs";
 import { User } from "../../../models/user";
+import { Store } from "@ngrx/store";
+import { Router } from "@angular/router";
+import { selectIsAuthenticated } from "./auth.selector";
+import { AppState } from "../app-state";
 
 @Injectable()
 export class AuthEffects{
 
     constructor(
         private actions$: Actions, 
-        private authService: AuthService 
+        private authService: AuthService,
+        private store: Store<AppState>,
+        private router: Router
     ) {}
 
     login$ = createEffect(() =>
@@ -60,4 +66,15 @@ export class AuthEffects{
             )
         )
     ))
+
+    redirectOnAuthChange$ = createEffect(() => this.store.select(selectIsAuthenticated).pipe(
+        distinctUntilChanged(),
+        tap((isAuth) => {
+            if(isAuth)
+                this.router.navigate(["/authenticated"]);
+            else
+                this.router.navigate(["/account/login"]);
+        })
+    ), { dispatch: false});
+
 }

@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable, of, tap } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import * as Actions from '../store/server-errors/server-errors.actions';
+import * as ServerErrorActions from '../store/server-errors/server-errors.actions';
+import * as AuthActions from '../store/auth/auth.actions';
+import { selectIsAuthenticated } from '../store/auth/auth.selector';
 
 
 @Injectable()
@@ -18,12 +20,15 @@ export class ServerErrorInterceptor implements HttpInterceptor{
     return next.handle(req).pipe(
       map((response) => {
         if(response instanceof HttpResponse && ((response as HttpResponse<any>).ok))
-          this.store.dispatch(Actions.clearError());
+          this.store.dispatch(ServerErrorActions.clearError());
         return response;
       }),
       catchError((response: HttpErrorResponse) => {
       if(response.status !== 200)
-        this.store.dispatch(Actions.setError({status: response.status, message: response.error.message}));
+        this.store.dispatch(ServerErrorActions.setError({status: response.status, message: response.error.message}));
+      if(response.status === 401){
+        this.store.dispatch(AuthActions.invalidToken());
+      }
       return of(response);
     }))
   }
