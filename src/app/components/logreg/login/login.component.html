@@ -20,7 +20,7 @@
             <app-server-error></app-server-error>
         </div>
         <button class="btn btn-green wide login-btn" type="submit">Login</button>
-        <a routerLink="/account/register" class="logreg">click here to crate account</a>
+        <a class="logreg" (click)="clearServerError()" routerLink="/account/register">click here to crate account</a>
     </form>
 </div>
 

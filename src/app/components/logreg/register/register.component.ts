@@ -3,7 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { matchPasswords } from '../../../../helpers/customValidators';
 import { checkErrors } from '../../../../helpers/validationErrorMessage';
 import { CreateUserDto } from '../../../dtos/create-user.dto';
-import { UserService } from '../../../services/user.service';
+import { Store } from '@ngrx/store';
+import * as Actions from '../../../store/server-errors/server-errors.actions';
+import { register } from '../../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +16,7 @@ export class RegisterComponent {
 
 
   constructor(
-    private userService: UserService
+    private store: Store
   ){}
 
   errorMsg: string | null = null;
@@ -65,10 +67,12 @@ export class RegisterComponent {
       
       if(first_name && last_name && user_email && user_password){
         const user: CreateUserDto = { first_name, last_name, user_email, user_password };
-        this.userService.register(user).subscribe(res => {
-          console.log(res);
-        });
+        this.store.dispatch(register({createUserDto: user}));
       }
     }
+  }
+
+  clearServerError(){
+    this.store.dispatch(Actions.clearError());
   }
 }

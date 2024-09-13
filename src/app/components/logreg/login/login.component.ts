@@ -4,6 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { checkErrors } from '../../../../helpers/validationErrorMessage';
 import * as AuthActions from '../../../store/auth/auth.actions';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { clearError } from '../../../store/server-errors/server-errors.actions';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,8 @@ import { Store } from '@ngrx/store';
 export class LoginComponent {
   
   constructor(
-    private store: Store
+    private store: Store,
+    private router: Router
   ){}
 
   errorMsg: string | null = null;
@@ -41,5 +44,9 @@ export class LoginComponent {
         this.store.dispatch(AuthActions.login({username: email, password: password}));
       }
     }
+  }
+
+  clearServerError(){
+    this.store.dispatch(clearError());
   }
 }

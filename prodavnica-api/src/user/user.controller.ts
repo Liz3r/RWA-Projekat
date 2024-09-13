@@ -12,7 +12,7 @@ export class UserController {
   @Post('register')
   create(@Body() createUserDto: CreateUserDto) {
      const response = this.userService.create(createUserDto);
-     console.log(response);
+     return response;
   }
 
   @Get('allUsers')
