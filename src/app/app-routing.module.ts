@@ -4,12 +4,14 @@ import { LoginComponent } from './components/logreg/login/login.component';
 import { RegisterComponent } from './components/logreg/register/register.component';
 import { LogregComponent } from './components/logreg/logreg.component';
 import { AuthenticatedComponent } from './components/authenticated/authenticated.component';
+import { authenticatedGuard, notAuthenticatedGuard } from './routeGuards/authenticated.guard';
 
 const routes: Routes = [
   
   {
     path: "account",
     component: LogregComponent,
+    canActivate: [notAuthenticatedGuard],
     children: [
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
@@ -18,7 +20,8 @@ const routes: Routes = [
   },
   {
     path: "authenticated",
-    component: AuthenticatedComponent
+    component: AuthenticatedComponent,
+    canActivate: [authenticatedGuard]
   }
 ];
 

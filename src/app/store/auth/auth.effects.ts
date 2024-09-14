@@ -70,9 +70,10 @@ export class AuthEffects{
     redirectOnAuthChange$ = createEffect(() => this.store.select(selectIsAuthenticated).pipe(
         distinctUntilChanged(),
         tap((isAuth) => {
-            if(isAuth)
+            
+            if(isAuth && !this.router.url.startsWith("/authenticated"))
                 this.router.navigate(["/authenticated"]);
-            else
+            else if(isAuth && !this.router.url.startsWith("/account"))
                 this.router.navigate(["/account/login"]);
         })
     ), { dispatch: false});
