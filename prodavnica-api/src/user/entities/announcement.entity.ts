@@ -28,8 +28,7 @@ export class Announcement{
 
     @Column({
         unique: false,
-        nullable: false,
-        length: 25
+        nullable: false
     })
     price: number;
 

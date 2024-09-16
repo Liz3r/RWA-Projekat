@@ -8,6 +8,7 @@ import { User } from './user/entities/user.entity';
 import { AnnouncementController } from './announcement/announcement.controller';
 import { AnnouncementService } from './announcement/announcement.service';
 import { AnnouncementModule } from './announcement/announcement.module';
+import { Announcement } from './user/entities/announcement.entity';
 
 @Module({
   imports: [AuthModule,
@@ -18,13 +19,13 @@ import { AnnouncementModule } from './announcement/announcement.module';
       username: 'root',
       password: 'admin',
       database: 'rwadb',
-      entities: [User],
+      entities: [User, Announcement],
       synchronize: true
     }),
     UserModule,
     AnnouncementModule
   ],
-  controllers: [AppController, AnnouncementController],
-  providers: [AppService, AnnouncementService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
