@@ -37,7 +37,7 @@ footer{
 .search-div{
     display: flex;
     flex-direction: row;
-    width: fit-content;
+    width: 600px;
 }
 
 .search-bar{
@@ -52,7 +52,7 @@ footer{
     border: 1px solid #00679E;
     padding-top: 2px;
     padding-bottom: 2px;
-    padding-left: 10px;
+    padding-left: 12px;
 }
 
 .search-btn{
@@ -80,6 +80,9 @@ footer{
     width: 100px;
     height: 45px;
     margin-bottom: 20px;
+}
+.logo:hover{
+    cursor: pointer;
 }
 
 .add-btn{

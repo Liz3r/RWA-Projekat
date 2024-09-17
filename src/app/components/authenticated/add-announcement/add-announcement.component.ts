@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-announcement',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AddAnnouncementComponent {
 
+  constructor(private router:Router){}
+
+  onLogoClick(){
+    this.router.navigate(['authenticated/home']);
+  }
 }
