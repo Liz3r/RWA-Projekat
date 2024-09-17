@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/logreg/login/login.component';
 import { RegisterComponent } from './components/logreg/register/register.component';
 import { LogregComponent } from './components/logreg/logreg.component';
@@ -11,7 +11,6 @@ import { credentialsResolver } from './resolvers/credentials.resolver';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  {path: '', resolve: [credentialsResolver], component: AppComponent},
   {
     path: "account",
     component: LogregComponent,
@@ -19,7 +18,7 @@ const routes: Routes = [
     children: [
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
-      {path: '', redirectTo: 'login', pathMatch: 'full'}
+      {path: '', redirectTo: 'account/login', pathMatch: 'full'}
     ]
   },
   {
@@ -29,8 +28,13 @@ const routes: Routes = [
     children: [
       {path: 'home', component: HomeComponent},
       {path: 'add', component: AddAnnouncementComponent},
-      //{path: '', redirectTo: 'add', pathMatch: 'full'}
+      {path: '', redirectTo: 'authenticated/home', pathMatch: 'full'}
     ]
+  },
+  {
+    path: '', 
+    component: AppComponent,
+    resolve: {credentials: credentialsResolver}
   }
   
 ];

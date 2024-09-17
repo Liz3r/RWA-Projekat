@@ -6,13 +6,16 @@ import { catchError } from 'rxjs/operators';
 import * as ServerErrorActions from '../store/server-errors/server-errors.actions';
 import * as AuthActions from '../store/auth/auth.actions';
 import { selectIsAuthenticated } from '../store/auth/auth.selector';
+import { Router } from '@angular/router';
+import { AppState } from '../store/app-state';
 
 
 @Injectable()
 export class ServerErrorInterceptor implements HttpInterceptor{
 
   constructor(
-    private store: Store
+    private store: Store<AppState>,
+    private router: Router
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
@@ -28,6 +31,7 @@ export class ServerErrorInterceptor implements HttpInterceptor{
         this.store.dispatch(ServerErrorActions.setError({status: response.status, message: response.error.message}));
       if(response.status === 401){
         this.store.dispatch(AuthActions.invalidToken());
+        this.router.navigate(['account/login']);
       }
       return of(response);
     }))

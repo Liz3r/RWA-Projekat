@@ -7,8 +7,8 @@ export interface ErrorState{
 }
 
 export const InitialErrorState: ErrorState = {
-    status: 0,
-    message: ''
+    status: null,
+    message: null
 };
 
 export const serverErrorReducer = createReducer(

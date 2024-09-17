@@ -30,6 +30,7 @@ export class AuthEffects{
                         user_email: res.user_email,
                         first_name: res.user_firstname
                     };
+                    this.router.navigate(['authenticated/home']);
                     return AuthActions.loginSuccess({user})}),
                     catchError(() => of(AuthActions.loginFailure()))
                 )

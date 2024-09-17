@@ -7,7 +7,7 @@ import { LoginComponent } from './components/logreg/login/login.component';
 import { RegisterComponent } from './components/logreg/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
-import { StoreModule } from '@ngrx/store';
+import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from '@ngrx/store';
 import { ServerErrorInterceptor } from './interceptors/server-error.interceptor';
 import { serverErrorReducer } from './store/server-errors/server-errors.reducer';
 import { ServerErrorComponent } from './components/server-error/server-error.component';
@@ -19,6 +19,15 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/auth/auth.effects';
 import { HomeComponent } from './components/authenticated/home/home.component';
 import { AddAnnouncementComponent } from './components/authenticated/add-announcement/add-announcement.component';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AppState } from './store/app-state';
+import { localStorageSync } from 'ngrx-store-localstorage';
+
+
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync({ keys: ['auth', 'serverErrors'], rehydrate: true })(reducer);
+}
+const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 
 @NgModule({
   declarations: [
@@ -34,8 +43,10 @@ import { AddAnnouncementComponent } from './components/authenticated/add-announc
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterLink,
+    RouterLinkActive,
     ReactiveFormsModule,
-    StoreModule.forRoot({serverErrors: serverErrorReducer, auth: authReducer}),
+    StoreModule.forRoot({serverErrors: serverErrorReducer, auth: authReducer}, {metaReducers}),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
