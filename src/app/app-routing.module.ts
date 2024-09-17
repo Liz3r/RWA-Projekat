@@ -5,9 +5,13 @@ import { RegisterComponent } from './components/logreg/register/register.compone
 import { LogregComponent } from './components/logreg/logreg.component';
 import { AuthenticatedComponent } from './components/authenticated/authenticated.component';
 import { authenticatedGuard, notAuthenticatedGuard } from './routeGuards/authenticated.guard';
+import { HomeComponent } from './components/authenticated/home/home.component';
+import { AddAnnouncementComponent } from './components/authenticated/add-announcement/add-announcement.component';
+import { credentialsResolver } from './resolvers/credentials.resolver';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  
+  {path: '', resolve: [credentialsResolver], component: AppComponent},
   {
     path: "account",
     component: LogregComponent,
@@ -21,8 +25,14 @@ const routes: Routes = [
   {
     path: "authenticated",
     component: AuthenticatedComponent,
-    canActivate: [authenticatedGuard]
+    canActivate: [authenticatedGuard],
+    children: [
+      {path: 'home', component: HomeComponent},
+      {path: 'add', component: AddAnnouncementComponent},
+      //{path: '', redirectTo: 'add', pathMatch: 'full'}
+    ]
   }
+  
 ];
 
 @NgModule({

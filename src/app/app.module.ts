@@ -17,6 +17,8 @@ import { AuthenticatedComponent } from './components/authenticated/authenticated
 import { authReducer } from './store/auth/auth.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/auth/auth.effects';
+import { HomeComponent } from './components/authenticated/home/home.component';
+import { AddAnnouncementComponent } from './components/authenticated/add-announcement/add-announcement.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { AuthEffects } from './store/auth/auth.effects';
     ServerErrorComponent,
     LogregComponent,
     AuthenticatedComponent,
+    HomeComponent,
+    AddAnnouncementComponent,
   ],
   imports: [
     BrowserModule,

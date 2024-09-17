@@ -1,0 +1,99 @@
+header{
+    height: 78px;
+    border-bottom: 1px solid rgb(212, 212, 212);
+    background-color: rgb(251, 251, 251);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+footer{
+    height: 78px;
+    background-color: black;
+}
+
+//content
+.content-div{
+    display: flex;
+    flex: 1;
+    margin-top: 20px;
+    flex-direction: row;
+}
+.left-div{
+    display: flex;
+    flex: 0.5;
+}
+.main-div{
+    display: flex;
+    flex: 1;
+    height: 100vh;
+}
+.right-div{
+    display: flex;
+    flex: 0.5;
+}
+//--
+.search-div{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+}
+
+.search-bar{
+    width: 500px;
+    height: 30px;
+    outline: none;
+    padding-left: 10px;
+}
+
+.search-bar:focus{
+    outline: none;
+    border: 1px solid #00679E;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+}
+
+.search-btn{
+    //margin-left: 2px;
+    border: 1px solid #00679E;
+    background-color: #00679E;
+    color: white;
+    width: 44px;
+    height: 36px;
+}
+.search-btn:hover{
+    background-color: #0079b9;
+    cursor: pointer;
+}
+
+.logo-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-right: 100px;
+}
+
+.logo{
+    width: 100px;
+    height: 45px;
+    margin-bottom: 20px;
+}
+
+.add-btn{
+    width: fit-content;
+    height: 36px;
+    background-color: #F6AE2D;
+    border: none;
+    margin-left: 50px;
+    color: white;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.add-btn:hover{
+    background-color: #eba72a;
+    cursor: pointer;
+}

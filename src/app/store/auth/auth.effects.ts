@@ -67,15 +67,15 @@ export class AuthEffects{
         )
     ))
 
-    redirectOnAuthChange$ = createEffect(() => this.store.select(selectIsAuthenticated).pipe(
-        distinctUntilChanged(),
-        tap((isAuth) => {
+    // redirectOnAuthChange$ = createEffect(() => this.store.select(selectIsAuthenticated).pipe(
+    //     distinctUntilChanged(),
+    //     tap((isAuth) => {
             
-            if(isAuth && !this.router.url.startsWith("/authenticated"))
-                this.router.navigate(["/authenticated"]);
-            else if(isAuth && !this.router.url.startsWith("/account"))
-                this.router.navigate(["/account/login"]);
-        })
-    ), { dispatch: false});
+    //         if(isAuth && !this.router.url.startsWith("/authenticated"))
+    //             this.router.navigate(["/authenticated/home"]);
+    //         else if(isAuth && !this.router.url.startsWith("/account"))
+    //             this.router.navigate(["/account/login"]);
+    //     })
+    // ), { dispatch: false});
 
 }

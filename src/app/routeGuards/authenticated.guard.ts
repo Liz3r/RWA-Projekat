@@ -9,10 +9,10 @@ export const authenticatedGuard: CanActivateFn = (route, state):Observable<boole
   
   const store = inject(Store<AppState>);
   const router = inject(Router);
-
+  console.log('from guard');
   return store.select(selectIsAuthenticated).pipe(
     switchMap((isAuth) => {
-        console.log(isAuth);
+      console.log(isAuth);
         if(isAuth)
           return of(true);
         router.navigate(["/account/login"]);
@@ -26,11 +26,13 @@ export const notAuthenticatedGuard: CanActivateFn = (route, state):Observable<bo
   
   const store = inject(Store<AppState>);
   const router = inject(Router);
+  console.log('from guard');
   
   return store.select(selectIsAuthenticated).pipe(
     switchMap((isAuth) => {
+      console.log(isAuth);
       if(isAuth){
-        router.navigate(["/authenticated"]);
+        router.navigate(["/authenticated/home"]);
         return of(false);
       }
       return of(true);

@@ -4,13 +4,13 @@ import * as Actions from './auth.actions';
 
 
 export interface AuthState{
-    isAuthenticated: boolean,
+    isAuthenticated: boolean | null,
     isLoading: boolean,
     user: User | null
 }
 
 export const initialAuthState: AuthState = {
-    isAuthenticated: false,
+    isAuthenticated: null,
     isLoading: false,
     user: null
 }
