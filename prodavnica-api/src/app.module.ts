@@ -9,6 +9,8 @@ import { AnnouncementController } from './announcement/announcement.controller';
 import { AnnouncementService } from './announcement/announcement.service';
 import { AnnouncementModule } from './announcement/announcement.module';
 import { Announcement } from './user/entities/announcement.entity';
+import { Category } from './category/entities/category.entity';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [AuthModule,
@@ -19,11 +21,12 @@ import { Announcement } from './user/entities/announcement.entity';
       username: 'root',
       password: 'admin',
       database: 'rwadb',
-      entities: [User, Announcement],
+      entities: [User, Announcement, Category],
       synchronize: true
     }),
     UserModule,
-    AnnouncementModule
+    AnnouncementModule,
+    CategoryModule
   ],
   controllers: [AppController],
   providers: [AppService],

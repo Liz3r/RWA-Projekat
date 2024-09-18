@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-announcement',
@@ -9,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class AddAnnouncementComponent {
   
+  //allCategories$: Observable<string>;
+
   constructor(private router:Router){}
 
   newAnnouncementForm = new FormGroup({

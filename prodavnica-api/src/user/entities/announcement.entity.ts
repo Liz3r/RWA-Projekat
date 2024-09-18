@@ -1,10 +1,14 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Category } from "../../category/entities/category.entity";
 
 @Entity()
 export class Announcement{
 
     @PrimaryGeneratedColumn()
     id: number;
+
+    @ManyToOne(type => Category, category => category.announcements)
+    category: Category;
 
     @Column({
         unique: false,
