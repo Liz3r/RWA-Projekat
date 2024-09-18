@@ -22,6 +22,7 @@ export class AuthEffects{
     login$ = createEffect(() =>
         this.actions$.pipe(
             ofType(AuthActions.login),
+            tap(() => {console.log("from effect")}),
             switchMap(({ username, password }) =>
                 this.authService.login(username, password).pipe(
                 map((res) => {

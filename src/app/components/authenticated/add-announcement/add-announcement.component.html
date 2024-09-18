@@ -44,13 +44,20 @@
         </div>
     </div>
 
+    <div class="category">
+        <label>Category</label>
+        <select>
+            <option *ngFor="let op in "></option>
+        </select>
+    </div>
+
     <div class="description-div">
         <label for="dsc">Announcement text</label>
         <textarea id="dsc" class="all-inputs description-textarea"></textarea>
     </div>
 
-    <button class="btn btn-green post-btn">Post</button>
 </form>
+<button class="btn btn-green post-btn" (click)="fetchhh()">Post</button>
 
 <footer>
 

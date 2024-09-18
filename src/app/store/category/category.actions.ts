@@ -1,13 +1,16 @@
-import { createAction } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
+import { Category } from "../../../models/category";
 
-export const login = createAction(
-    '[Categories] Fetch Categories'
+
+export const fetchCategories = createAction(
+    '[Categories] Load Categories'
 );
 
-export const loginSuccess = createAction(
-    '[Categories] Fetch Succeeded'
+export const fetchSuccess = createAction(
+    '[Categories] Loading Succeeded',
+    props<{categories: Category[]}>()
 );
 
-export const loginFailure = createAction(
-    '[Categories] Fetch Failed'
+export const fetchFailure = createAction(
+    '[Categories] Loading Failed'
 );
