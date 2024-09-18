@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,8 +8,22 @@ import { Router } from '@angular/router';
   styleUrl: './add-announcement.component.scss'
 })
 export class AddAnnouncementComponent {
-
+  
   constructor(private router:Router){}
+
+  newAnnouncementForm = new FormGroup({
+    picture: new FormControl<string>('',[]),
+    title: new FormControl<string>('',[]),
+    currency: new FormControl<String>('din',[]),
+    condition: new FormControl<String>('new',[]),
+    price: new FormControl<String>('',[]),
+    description: new FormControl<String>('',[]),
+  });
+
+
+
+
+
 
   onLogoClick(){
     this.router.navigate(['authenticated/home']);

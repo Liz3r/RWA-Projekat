@@ -12,41 +12,41 @@ footer{
     height: 78px;
     background-color: black;
 }
-
+.condition-div{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.condition-inputs{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 //content
 .content-div{
-    display: flex;
-    flex: 1;
-    margin-top: 20px;
-    flex-direction: row;
+    margin-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 35px;
+    width: 800px;
+    height: fit-content;
+    border: 1px solid #D4D4D4;
+    border-radius: 5px;
+    background-color: #FBFBFB;
+    padding: 50px;
 }
-.left-div{
-    display: flex;
-    flex: 0.5;
-}
-.main-div{
-    display: flex;
-    flex: 1;
-    height: 100vh;
-}
-.right-div{
-    display: flex;
-    flex: 0.5;
-}
-//--
 .search-div{
     display: flex;
     flex-direction: row;
     width: 600px;
 }
 
-
 .logo-div{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-right: 316px;
+    margin-right: 300px;
 }
 
 .logo{
@@ -56,4 +56,101 @@ footer{
 }
 .logo:hover{
     cursor: pointer;
+}
+//--------------
+.title-div{
+    margin-top: 50px;
+}
+.currency-rsd-div, .currency-eur-div{
+    width: fit-content;
+}
+.price-curr-div{
+    margin-top: 20px;
+    height: 70px;
+}
+.price-div{
+    display: flex;
+    align-items: center;
+}
+#dinar{
+    margin-left: 50px;
+}
+#evro{
+    margin-left: 20px;
+}
+.all-inputs{
+    font-size: 15px;
+    border: 1px solid #8F8F9D;
+    border-radius: 5px;
+    height: 30px;
+    padding-left: 8px;
+    margin-top: 5px;
+}
+.description-div{
+    margin-top: 20px;
+}
+.description-textarea{
+    width: 700px;
+    height: 250px;
+    resize: none;
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow-y: scroll;
+}
+
+.post-btn{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+
+    width: 150px;
+    height: 35px;
+}
+
+.title-input{
+    width: 400px;
+}
+.all-inputs:focus{
+    outline: rgb(159, 199, 248) solid 1px;
+}
+
+.add-image-div{
+    width: 300px;
+    height: 300px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 2px dashed #D4D4D4;
+    position: relative;
+    cursor: pointer;
+}
+h3{
+    font-weight: 600;
+}
+
+.new-ann-title{
+    margin-top: 10px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    width: 895px;
+    height: 50px;
+    border: 1px solid #D4D4D4;
+    border-radius: 5px;
+    background-color: #FBFBFB;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-image-div:hover{
+    background-color: rgb(246, 250, 255);
+}
+
+.img-icon{
+    position: relative;
+    top: 140px;
+    left: 135px;
 }

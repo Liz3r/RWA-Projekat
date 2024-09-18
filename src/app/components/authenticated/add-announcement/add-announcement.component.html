@@ -6,9 +6,51 @@
     </div>
 </header>
 
-<div class="content-div">
-    
+<div class="new-ann-title">
+    <h3>Post new announcement</h3>
 </div>
+
+<form class="content-div">
+    <div class="add-image-div">
+        <i class="fas fa-image fa-2xl img-icon"></i>
+    </div>
+    <div class="title-div">
+        <label>Announcement title</label>
+        <input type="text" class="all-inputs title-input"/>
+    </div>
+
+    <div class="price-curr-div">
+
+        <label>Price</label>
+        <div class="price-div">
+            <input type="text" class="all-inputs price-input"/>
+            <input id="dinar" type="radio" value="rsd" name="currency"/>
+            <label for="dinar">RSD</label>
+            <input id="evro" type="radio" value="eur" name="currency"/>
+            <label for="evro">EUR</label>
+        </div>
+        
+    </div>
+
+    <div class="condition-div">
+        <label>Condition:</label>
+        <div class="condition-inputs">
+            <input id="new" type="radio" value="new" name="condition"/>
+            <label for="new">new</label>
+            <input id="used" type="radio" value="used" name="condition"/>
+            <label for="used">used</label>
+            <input id="faulty" type="radio" value="faulty" name="condition"/>
+            <label for="faulty">faulty</label>
+        </div>
+    </div>
+
+    <div class="description-div">
+        <label for="dsc">Announcement text</label>
+        <textarea id="dsc" class="all-inputs description-textarea"></textarea>
+    </div>
+
+    <button class="btn btn-green post-btn">Post</button>
+</form>
 
 <footer>
 
