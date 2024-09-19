@@ -1,22 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { from, map, Observable, of, switchMap, take } from 'rxjs';
 import { AppState } from '../../../store/app-state';
 import { Store } from '@ngrx/store';
 import { fetchCategories } from '../../../store/category/category.actions';
+import { selectCategoriesList } from '../../../store/category/category.selector';
+import { Category } from '../../../../models/category';
 
 @Component({
   selector: 'app-add-announcement',
   templateUrl: './add-announcement.component.html',
   styleUrl: './add-announcement.component.scss'
 })
-export class AddAnnouncementComponent {
+export class AddAnnouncementComponent implements OnInit{
   
-  //allCategories$: Observable<string>;
+  allCategories$!: Observable<Category[]>;
 
   constructor(private router:Router, private store: Store<AppState>){
     
+  }
+  ngOnInit(): void {
+    this.allCategories$ = this.store.select(selectCategoriesList);
   }
 
   newAnnouncementForm = new FormGroup({
@@ -28,15 +33,8 @@ export class AddAnnouncementComponent {
     description: new FormControl<String>('',[]),
   });
 
-  
-
-  fetchhh(){
-    this.store.dispatch(fetchCategories());
-  }
-
 
   onLogoClick(){
-    
     this.router.navigate(['authenticated/home']);
   }
 }

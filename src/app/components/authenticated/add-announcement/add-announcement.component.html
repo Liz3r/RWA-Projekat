@@ -47,7 +47,7 @@
     <div class="category">
         <label>Category</label>
         <select>
-            <option *ngFor="let op in "></option>
+            <option *ngFor="let categ of allCategories$ | async" [value]="categ.id">{{categ.title}}</option>
         </select>
     </div>
 
@@ -57,7 +57,7 @@
     </div>
 
 </form>
-<button class="btn btn-green post-btn" (click)="fetchhh()">Post</button>
+<button class="btn btn-green post-btn">Post</button>
 
 <footer>
 
