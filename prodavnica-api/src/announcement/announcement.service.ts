@@ -1,18 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Announcement } from 'src/user/entities/announcement.entity';
-import { Repository } from 'typeorm';
+import { CreateAnnouncementDto } from './dto/create-announcement.dto';
+import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
 
 @Injectable()
 export class AnnouncementService {
+  create(createAnnouncementDto: CreateAnnouncementDto) {
+    return 'This action adds a new announcement';
+  }
 
-    constructor(
-        @InjectRepository(Announcement)
-        private readonly announcementRepository: Repository<Announcement>
-      ){}
+  findAll() {
+    return `This action returns all announcement`;
+  }
 
-    
-    allAnnouncementsGetPage(){
-        this.announcementRepository.createQueryBuilder("Announcement").orderBy("id").limit(15);
-    }
+  findOne(id: number) {
+    return `This action returns a #${id} announcement`;
+  }
+
+  update(id: number, updateAnnouncementDto: UpdateAnnouncementDto) {
+    return `This action updates a #${id} announcement`;
+  }
+
+  remove(id: number) {
+    return `This action removes a #${id} announcement`;
+  }
 }

@@ -10,25 +10,25 @@
     <h3>Post new announcement</h3>
 </div>
 
-<form class="content-div">
+<form class="content-div" [formGroup]="newAnnouncementForm" (submit)="onSubmit()">
     <label for="img-input" class="add-image-div">
         <i class="fas fa-image fa-2xl img-icon" *ngIf="!pictureData"></i>
         <img *ngIf="pictureData" [src]="pictureData" class="img-preview">
-        <input id="img-input" type="file" (change)="onImageSelected($event)" class="hidden"/>
+        <input id="img-input" type="file" accept="image/*" (change)="onImageSelected($event)" class="hidden"/>
     </label>
     <div class="title-div">
         <label>Announcement title</label>
-        <input type="text" class="all-inputs title-input"/>
+        <input type="text" class="all-inputs title-input" formControlName="title"/>
     </div>
 
     <div class="price-curr-div">
 
         <label>Price</label>
         <div class="price-div">
-            <input type="text" class="all-inputs price-input"/>
-            <input id="dinar" type="radio" value="rsd" name="currency"/>
+            <input type="text" class="all-inputs price-input" formControlName="price"/>
+            <input id="dinar" type="radio" value="rsd" name="currency" formControlName="currency"/>
             <label for="dinar">RSD</label>
-            <input id="evro" type="radio" value="eur" name="currency"/>
+            <input id="evro" type="radio" value="eur" name="currency" formControlName="currency"/>
             <label for="evro">EUR</label>
         </div>
         
@@ -37,29 +37,29 @@
     <div class="condition-div">
         <label>Condition:</label>
         <div class="condition-inputs">
-            <input id="new" type="radio" value="new" name="condition"/>
+            <input id="new" type="radio" value="new" name="condition" formControlName="condition"/>
             <label for="new">new</label>
-            <input id="used" type="radio" value="used" name="condition"/>
+            <input id="used" type="radio" value="used" name="condition" formControlName="condition"/>
             <label for="used">used</label>
-            <input id="faulty" type="radio" value="faulty" name="condition"/>
+            <input id="faulty" type="radio" value="faulty" name="condition" formControlName="condition"/>
             <label for="faulty">faulty</label>
         </div>
     </div>
 
     <div class="category">
         <label>Category</label>
-        <select>
+        <select formControlName="category">
             <option *ngFor="let categ of allCategories$ | async" [value]="categ.id">{{categ.title}}</option>
         </select>
     </div>
 
     <div class="description-div">
         <label for="dsc">Announcement text</label>
-        <textarea id="dsc" class="all-inputs description-textarea"></textarea>
+        <textarea id="dsc" class="all-inputs description-textarea" formControlName="description"></textarea>
     </div>
 
+    <button class="btn btn-green post-btn">Post</button>
 </form>
-<button class="btn btn-green post-btn">Post</button>
 
 <footer>
 
