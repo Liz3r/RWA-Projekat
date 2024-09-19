@@ -11,9 +11,11 @@
 </div>
 
 <form class="content-div">
-    <div class="add-image-div">
-        <i class="fas fa-image fa-2xl img-icon"></i>
-    </div>
+    <label for="img-input" class="add-image-div">
+        <i class="fas fa-image fa-2xl img-icon" *ngIf="!pictureData"></i>
+        <img *ngIf="pictureData" [src]="pictureData" class="img-preview">
+        <input id="img-input" type="file" (change)="onImageSelected($event)" class="hidden"/>
+    </label>
     <div class="title-div">
         <label>Announcement title</label>
         <input type="text" class="all-inputs title-input"/>
