@@ -87,7 +87,7 @@ export class AddAnnouncementComponent implements OnInit{
     
     keys.forEach(key => {
       let value = rawForm[key];
-      data.append(key,value);
+      data.set(key,value);
     })
 
     return data;
@@ -95,11 +95,12 @@ export class AddAnnouncementComponent implements OnInit{
 
   onSubmit(){
     this.errMsg = checkErrors(this.newAnnouncementForm);
-    console.log(this.newAnnouncementForm.getRawValue());
+    //console.log(this.newAnnouncementForm.getRawValue());
     if(this.newAnnouncementForm.valid && !this.errMsg && this.newAnnouncementForm.value.picture){
       const sendData = this.formGroupToFormData(this.newAnnouncementForm);
       
-      sendData.append('picture', this.newAnnouncementForm.value.picture, this.newAnnouncementForm.value.picture?.name)
+      console.log(this.newAnnouncementForm.value.picture);
+      sendData.set('picture', this.newAnnouncementForm.value.picture, this.newAnnouncementForm.value.picture?.name)
       this.http.post(`${API_URL}/announcement/newAnnouncement`, sendData, {withCredentials: true})
       .subscribe((res) => console.log(res));
     }

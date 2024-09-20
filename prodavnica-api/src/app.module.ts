@@ -5,8 +5,6 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
-import { AnnouncementController } from './announcement/announcement.controller';
-import { AnnouncementService } from './announcement/announcement.service';
 import { AnnouncementModule } from './announcement/announcement.module';
 import { Announcement } from './announcement/entities/announcement.entity';
 import { Category } from './category/entities/category.entity';

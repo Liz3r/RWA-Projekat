@@ -4,14 +4,18 @@ import { diskStorage } from 'multer';
 import { extname, join } from 'path';
 import { AnnouncementController } from './announcement.controller';
 import { AnnouncementService } from './announcement.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Announcement } from './entities/announcement.entity';
 
 const uploadDir = join(process.cwd(), 'uploads');
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([Announcement]),
     MulterModule.register({
       storage: diskStorage({
         destination: (req, file, cb) => {
+          console.log("from multer register");
           cb(null, uploadDir);
         },
         filename: (req, file, cb) => {

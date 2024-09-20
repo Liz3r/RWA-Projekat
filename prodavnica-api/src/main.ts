@@ -18,8 +18,8 @@ async function bootstrap() {
   if (!existsSync(uploadDir)) {
     mkdirSync(uploadDir);
   }
-
   app.use('/uploads', express.static(join(process.cwd(), 'uploads')));
+
   await app.listen(3000);
 }
 bootstrap();

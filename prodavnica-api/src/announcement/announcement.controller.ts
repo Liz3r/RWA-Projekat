@@ -11,10 +11,10 @@ export class AnnouncementController {
 
   @Post('newAnnouncement')
   @SkipAuth()
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(FileInterceptor('picture'))
   create(@UploadedFile(new ParseFilePipe({
     validators: [
-      new MaxFileSizeValidator({ maxSize: 1000 }),
+      //new MaxFileSizeValidator({ maxSize: 1000 }),
       new FileTypeValidator({ fileType: 'image/jpeg' }),
     ],
   })) file: Express.Multer.File) {
