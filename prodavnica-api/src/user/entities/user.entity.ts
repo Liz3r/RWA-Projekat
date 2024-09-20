@@ -1,9 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Announcement } from "src/announcement/entities/announcement.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
     id: number;
+
+    @OneToMany(type => Announcement, announcement => announcement.user)
+    announcements: Announcement;
 
     @Column({
         unique: true,

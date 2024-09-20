@@ -14,7 +14,7 @@ export class AnnouncementController {
   @UseInterceptors(FileInterceptor('picture'))
   create(@UploadedFile(new ParseFilePipe({
     validators: [
-      //new MaxFileSizeValidator({ maxSize: 1000 }),
+      new MaxFileSizeValidator({ maxSize: 1024*1024 }),
       new FileTypeValidator({ fileType: 'image/jpeg' }),
     ],
   })) file: Express.Multer.File) {
