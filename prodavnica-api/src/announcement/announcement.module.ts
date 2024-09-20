@@ -6,11 +6,14 @@ import { AnnouncementController } from './announcement.controller';
 import { AnnouncementService } from './announcement.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Announcement } from './entities/announcement.entity';
+import { UserService } from 'src/user/user.service';
+import { UserModule } from 'src/user/user.module';
 
 const uploadDir = join(process.cwd(), 'uploads');
 
 @Module({
   imports: [
+    UserModule,
     TypeOrmModule.forFeature([Announcement]),
     MulterModule.register({
       storage: diskStorage({

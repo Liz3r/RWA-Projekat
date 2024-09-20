@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Category } from "../../category/entities/category.entity";
 import { User } from "src/user/entities/user.entity";
 
@@ -9,10 +9,18 @@ export class Announcement{
     id: number;
 
     @ManyToOne(type => Category, category => category.announcements)
+    //@JoinColumn({name: 'categoryId'})
     category: Category;
 
     @ManyToOne(type => User, user => user.announcements)
+    //@JoinColumn({name: 'userId'})
     user: User;
+
+    //@Column()
+    //userId: number;
+
+    //@Column()
+    //categoryId: number;
 
     @Column({
         unique: false,
@@ -57,7 +65,7 @@ export class Announcement{
     @Column({
         unique: true,
         nullable: false,
-        length: 25
+        length: 100
     })
     picture: string;
 }
