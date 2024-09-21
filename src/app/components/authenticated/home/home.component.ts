@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppState } from '../../../store/app-state';
 import { Store } from '@ngrx/store';
-import { fetchCategories } from '../../../store/category/category.actions';
+import { loadCategories } from '../../../store/announcement/announcement.actions';
+
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent {
   constructor(private router: Router, private store: Store<AppState>){}
 
   onAddNewAnnouncement(){
-    this.store.dispatch(fetchCategories());
+    this.store.dispatch(loadCategories());
     this.router.navigate(['/authenticated/add']);
   }
 }

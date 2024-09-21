@@ -4,13 +4,12 @@ import { Router } from '@angular/router';
 import { from, map, Observable, of, switchMap, take } from 'rxjs';
 import { AppState } from '../../../store/app-state';
 import { Store } from '@ngrx/store';
-import { fetchCategories } from '../../../store/category/category.actions';
-import { selectCategoriesList } from '../../../store/category/category.selector';
 import { Category } from '../../../../models/category';
 import { isNumber } from '../../../../helpers/customValidators';
 import { checkErrors } from '../../../../helpers/validationErrorMessage';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../../../env';
+import { selectCategoriesList } from '../../../store/announcement/announcement.selector';
 
 @Component({
   selector: 'app-add-announcement',

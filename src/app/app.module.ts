@@ -20,10 +20,9 @@ import { AuthEffects } from './store/auth/auth.effects';
 import { HomeComponent } from './components/authenticated/home/home.component';
 import { AddAnnouncementComponent } from './components/authenticated/add-announcement/add-announcement.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AppState } from './store/app-state';
 import { localStorageSync } from 'ngrx-store-localstorage';
-import { CategoryReducer } from './store/category/category.reducer';
-import { CategoryEffects } from './store/category/category.effects';
+import { AnnouncementEffects } from './store/announcement/announcement.effects';
+import { AnnouncementReducer } from './store/announcement/announcement.reducer';
 
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -48,11 +47,11 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     RouterLink,
     RouterLinkActive,
     ReactiveFormsModule,
-    StoreModule.forRoot({serverErrors: serverErrorReducer, auth: authReducer, categories: CategoryReducer}, {metaReducers}),
+    StoreModule.forRoot({serverErrors: serverErrorReducer, auth: authReducer, announcements: AnnouncementReducer}, {metaReducers}),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
-    EffectsModule.forRoot([AuthEffects, CategoryEffects]),
+    EffectsModule.forRoot([AuthEffects, AnnouncementEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     })

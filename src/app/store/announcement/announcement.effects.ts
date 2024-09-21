@@ -2,13 +2,13 @@ import { Injectable } from "@angular/core";
 import { AppState } from "../app-state";
 import { Store } from "@ngrx/store";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import * as CategoryActions from "./category.actions";
+import * as CategoryActions from "./announcement.actions";
 import { CategoryService } from "../../services/category.service";
 import { catchError, map, of, switchMap } from "rxjs";
 
 
 @Injectable()
-export class CategoryEffects{
+export class AnnouncementEffects{
 
     constructor(
         private actions$: Actions,
@@ -18,17 +18,17 @@ export class CategoryEffects{
 
     loadingCategories$ = createEffect(() => 
         this.actions$.pipe(
-            ofType(CategoryActions.fetchCategories),
+            ofType(CategoryActions.loadCategories),
             switchMap(() => 
                 this.categoryService.getAllCategories().pipe(
                     map((categories) => {
-                        console.log(categories);
+                        //console.log(categories);
                         //provera da li vraceni objekat nije null
                         if(!categories)
-                            return CategoryActions.fetchFailure()
+                            return CategoryActions.loadCategoriesFailure()
                         //provera da li je vraceni objekat iteratable
                         if(!categories[Symbol.iterator])
-                            return CategoryActions.fetchFailure()
+                            return CategoryActions.loadCategoriesFailure()
                         //provera da li su svi clanovi niza imaju id i title
                         
                         // for(let i = 0; i < categories.length; i++){
@@ -36,10 +36,10 @@ export class CategoryEffects{
                         //         return CategoryActions.fetchFailure()
                         // }
                         // console.log(categories);
-                        return CategoryActions.fetchSuccess({categories: categories});
+                        return CategoryActions.loadCategoriesSuccess({categories: categories});
                     }),
                     catchError((err) => {
-                        return of(CategoryActions.fetchFailure())
+                        return of(CategoryActions.loadCategoriesFailure())
                     })
                 )
             )

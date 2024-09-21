@@ -20,9 +20,7 @@ export class AnnouncementController {
     ],
   })) file: Express.Multer.File, @Body() body: CreateAnnouncementDto, @Request() req) {
     const fileUrl = `http://localhost:3000/uploads/${file.filename}`; 
-    
     const userId = req.payload.id;
-
     return this.announcementService.create(body, userId, fileUrl);;
   }
 

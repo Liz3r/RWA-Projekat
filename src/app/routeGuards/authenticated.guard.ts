@@ -11,6 +11,7 @@ export const authenticatedGuard: CanActivateFn = (route, state):Observable<boole
   const store = inject(Store<AppState>);
   const router = inject(Router);
   return store.select(selectIsAuthenticated).pipe(
+    filter((isAuth) => isAuth !== null),
     switchMap((isAuth) => {
         if(isAuth)
           return of(true);
@@ -27,6 +28,7 @@ export const notAuthenticatedGuard: CanActivateFn = (route, state):Observable<bo
   const router = inject(Router);
   
   return store.select(selectIsAuthenticated).pipe(
+    filter((isAuth) => isAuth !== null),
     switchMap((isAuth) => {
       if(isAuth){
         router.navigate(["/authenticated/home"]);

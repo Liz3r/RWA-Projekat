@@ -25,7 +25,7 @@ export class AuthService {
             throw new HttpException('Invalid password', HttpStatus.UNAUTHORIZED);
         
         const payload = { id: user.id ,email: user.user_email, first_name: user.first_name};
-        const token = this.jwtService.sign(payload);
+        const token = this.jwtService.sign(payload, {expiresIn: 120*60*1000});
 
         return {
             user_id: user.id,
