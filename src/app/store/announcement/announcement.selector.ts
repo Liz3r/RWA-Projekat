@@ -8,3 +8,13 @@ export const selectCategoriesList = createSelector(
     selectAnnouncementFeature,
     (announcementState) => announcementState.categories
 )
+
+export const selectedCategory = createSelector(
+    selectAnnouncementFeature,
+    (annState) => annState.selectedCategoryId
+)
+
+export const selectPagesInfo = createSelector(
+    selectAnnouncementFeature,
+    (annState) => annState.pagesInfo
+)

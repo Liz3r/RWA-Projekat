@@ -10,6 +10,7 @@ import { checkErrors } from '../../../../helpers/validationErrorMessage';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../../../env';
 import { selectCategoriesList } from '../../../store/announcement/announcement.selector';
+import { loadCategories } from '../../../store/announcement/announcement.actions';
 
 @Component({
   selector: 'app-add-announcement',
@@ -27,6 +28,7 @@ export class AddAnnouncementComponent implements OnInit{
     
   }
   ngOnInit(): void {
+    this.store.dispatch(loadCategories());
     this.allCategories$ = this.store.select(selectCategoriesList);
   }
 

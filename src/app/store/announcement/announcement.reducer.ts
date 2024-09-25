@@ -2,17 +2,35 @@
 import { createReducer, on } from "@ngrx/store";
 import { Category } from "../../../models/category";
 import * as Actions from "./announcement.actions";
+import { CacheInfo } from "../../../models/cacheInfo";
+import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
+import { Announcement } from "../../../models/announcement";
 
+//---------pomocna struktura za rad sa kesiranjem stranica
+export const InitCacheInfo: CacheInfo = {
+    presentPages: [],
+    lastPageIndex: 0,
+    itemsPerPage: 7,
+    cachedPagesLimit: 5,
+    selectedPage: 0
+}
+//------------------
 
-export interface AnnouncementState{
+export const adapter: EntityAdapter<Announcement> = createEntityAdapter<Announcement>();
+
+export interface AnnouncementState extends EntityState<Announcement>{
     categories: Category[],
-    isLoading:  boolean
+    selectedCategoryId: number | null,
+    isLoading:  boolean,
+    pagesInfo: CacheInfo
 }
 
-export const InitialAnnouncementState: AnnouncementState = {
+export const InitialAnnouncementState: AnnouncementState = adapter.getInitialState({
     categories: [],
-    isLoading: false
-}
+    selectedCategoryId: null,
+    isLoading: false,
+    pagesInfo: InitCacheInfo
+})
 
 export const AnnouncementReducer = createReducer(
     InitialAnnouncementState,

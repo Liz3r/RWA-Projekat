@@ -1,4 +1,5 @@
 export interface Announcement{
+    id: number
     title: string
     category: number
     condition: string

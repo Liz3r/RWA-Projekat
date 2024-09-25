@@ -15,7 +15,6 @@ export class HomeComponent {
   constructor(private router: Router, private store: Store<AppState>){}
 
   onAddNewAnnouncement(){
-    this.store.dispatch(loadCategories());
     this.router.navigate(['/authenticated/add']);
   }
 }

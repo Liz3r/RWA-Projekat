@@ -58,6 +58,11 @@
         <textarea id="dsc" class="all-inputs description-textarea" formControlName="description"></textarea>
     </div>
 
+    <div class="error-div">
+        <div class="error-msg" *ngIf="errMsg">{{errMsg}}</div>
+        <app-server-error></app-server-error>
+    </div>
+
     <button class="btn btn-green post-btn">Post</button>
 </form>
 

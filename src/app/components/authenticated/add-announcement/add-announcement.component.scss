@@ -7,6 +7,25 @@ header{
     justify-content: center;
 }
 
+.error-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 30px;
+    height: 90px;
+}
+
+.error-div > *{
+    font-weight: 500;
+    font-size: 18px;
+    height: 45px;
+    display: block;
+    margin: auto;
+    color: red;
+}
+
+
 .hidden{
     display: none;
 }
