@@ -32,7 +32,7 @@ export class Announcement{
     @Column({
         unique: false,
         nullable: false,
-        length: 25
+        type: 'longtext'
     })
     description: string;
 

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppState } from '../../../store/app-state';
 import { Store } from '@ngrx/store';
-import { loadCategories } from '../../../store/announcement/announcement.actions';
+import { loadAnnouncementsPageAll, loadCategories } from '../../../store/announcement/announcement.actions';
 
 
 @Component({
@@ -10,9 +10,13 @@ import { loadCategories } from '../../../store/announcement/announcement.actions
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
   constructor(private router: Router, private store: Store<AppState>){}
+
+  ngOnInit(): void {
+    this.store.dispatch(loadAnnouncementsPageAll({page: 0}));
+  }
 
   onAddNewAnnouncement(){
     this.router.navigate(['/authenticated/add']);

@@ -19,16 +19,18 @@ export class AnnouncementEffects{
         private announcementService: AnnouncementService
     ){}
 
-    loadingAnnouncementsPageAll = createEffect(() => this.actions$.pipe(
+    loadingAnnouncementsPageAll$ = createEffect(() => this.actions$.pipe(
         ofType(AnnouncementActions.loadAnnouncementsPageAll),
         withLatestFrom(this.store.select(selectedCategory), this.store.select(selectPagesInfo)),
         switchMap(([{page},selectedCateg, pagesInfo]) => {
+            console.log("from effect");
             //if(selectedCateg === null){
                 return this.announcementService.getAnnouncementsPageAll(page, pagesInfo.itemsPerPage).pipe(
                     map((announcements) => {
+                        console.log(announcements);
                         if(announcements.length == 0)
                             return AnnouncementActions.loadAnnouncementsPageFailure()
-                        return AnnouncementActions.loadAnnouncementsPageSuccess({items: announcements})
+                        return AnnouncementActions.loadAnnouncementsPageSuccess({items: announcements, newSelectedPage: page})
                     }),
                     catchError((err) => {
                         return of(AnnouncementActions.loadAnnouncementsPageFailure())

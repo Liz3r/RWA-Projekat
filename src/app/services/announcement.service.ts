@@ -12,6 +12,6 @@ export class AnnouncementService {
   constructor(private http: HttpClient) { }
 
   getAnnouncementsPageAll(pageNum: number, itemsPerPageNum: number): Observable<Announcement[]>{
-    return this.http.get<Announcement[]>(`${API_URL}/announcements/all`, {withCredentials: true, params: {page: pageNum, itemsPerPage: itemsPerPageNum}});
+    return this.http.get<Announcement[]>(`${API_URL}/announcement/getPageInAllAnnouncements/${pageNum}/${itemsPerPageNum}`, {withCredentials: true, params: {page: pageNum, itemsPerPage: itemsPerPageNum}});
   }
 }

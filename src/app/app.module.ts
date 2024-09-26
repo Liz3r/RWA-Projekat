@@ -23,6 +23,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { AnnouncementEffects } from './store/announcement/announcement.effects';
 import { AnnouncementReducer } from './store/announcement/announcement.reducer';
+import { PageNavComponent } from './components/page-nav/page-nav.component';
+import { AnnouncementComponent } from './components/announcement/announcement.component';
 
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -40,6 +42,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     AuthenticatedComponent,
     HomeComponent,
     AddAnnouncementComponent,
+    PageNavComponent,
+    AnnouncementComponent,
   ],
   imports: [
     BrowserModule,

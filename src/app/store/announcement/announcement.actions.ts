@@ -27,7 +27,7 @@ export const loadAnnouncementsPageAll = createAction(
 
 export const loadAnnouncementsPageSuccess = createAction(
     '[All Announcements] Loading Succeeded',
-    props<{items: Announcement[]}>()
+    props<{items: Announcement[], newSelectedPage: number}>()
 )
 
 export const loadAnnouncementsPageFailure = createAction(

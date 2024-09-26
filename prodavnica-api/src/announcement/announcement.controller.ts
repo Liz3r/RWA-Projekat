@@ -24,9 +24,9 @@ export class AnnouncementController {
     return this.announcementService.create(body, userId, fileUrl);;
   }
 
-  @Get()
-  findAll() {
-    return this.announcementService.findAll();
+  @Get('getPageInAllAnnouncements/:page/:pageSize')
+  findAll(@Param('page') page: number, @Param('pageSize') pageSize: number) {
+    return this.announcementService.findPageInAllAnnouncements(page, pageSize);
   }
 
   @Get(':id')

@@ -37,4 +37,8 @@ export const AnnouncementReducer = createReducer(
     on(Actions.loadCategories, (state) => ({...state, isLoading: true})),
     on(Actions.loadCategoriesSuccess, (state, {categories}) => ({...state, categories: categories})),
     on(Actions.loadCategoriesFailure, (state) => ({...state, categories: []})),
+    on(Actions.loadAnnouncementsPageAll, (state) => ({...state, isLoading: true})),
+    on(Actions.loadAnnouncementsPageSuccess, (state, 
+        {items, newSelectedPage}) => adapter.addMany(items, {...state, isLoading: false, pagesInfo: {...state.pagesInfo, selectedPage: newSelectedPage}})),
+    on(Actions.loadAnnouncementsPageFailure, (state) => ({...state, isLoading: false}))
 )

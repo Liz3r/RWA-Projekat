@@ -60,8 +60,11 @@ export class AnnouncementService {
     return {message: 'Announcement created'};
   }
 
-  findAll() {
-    return `This action returns all announcement`;
+  async findPageInAllAnnouncements(page: number, pageSize:number) {
+
+    let res = await this.announcementRepository.createQueryBuilder('announcements').orderBy('id').skip(page*pageSize).take(pageSize).getMany();
+    
+    return res;
   }
 
   findOne(id: number) {

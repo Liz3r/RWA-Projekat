@@ -1,0 +1,23 @@
+
+<div class="item-container">
+
+    <div class="item-container-inner">
+        
+        <img [src]="announcement.picture">
+
+        <div class="naslov-container">
+            <a>{{fixTitle(announcement.title)}}</a>
+            <p class="opis text-secondary">{{fixDescription(announcement.description)}}</p>
+        </div>
+
+        <div class="cena-div">
+            <b class="cena">{{priceToString()}}</b>
+        </div>
+
+        <div class="posted-div">
+            <span class="text-secondary">{{announcement.datePosted}}</span>
+        </div>
+
+    </div>
+
+</div>

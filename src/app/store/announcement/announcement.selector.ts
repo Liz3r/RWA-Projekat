@@ -18,3 +18,8 @@ export const selectPagesInfo = createSelector(
     selectAnnouncementFeature,
     (annState) => annState.pagesInfo
 )
+
+export const selectCurrentPage = createSelector(
+    selectAnnouncementFeature,
+    (annState) => annState.entities
+)
