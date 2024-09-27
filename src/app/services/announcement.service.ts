@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Announcement } from '../../models/announcement';
-import { Observable } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../env';
 

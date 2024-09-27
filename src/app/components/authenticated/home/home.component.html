@@ -16,7 +16,10 @@
         
     </div>
     <div class="main-div">
+        <div *ngFor="let ann of announcements$ | async">
 
+            <app-announcement  [announcement]="ann"></app-announcement>
+        </div>
     </div> 
     <div class="right-div">
 

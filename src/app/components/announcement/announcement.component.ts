@@ -12,26 +12,11 @@ import { HttpClient } from '@angular/common/http';
 export class AnnouncementComponent {
 
   @Input() announcement!: Announcement;
-  @Input() prev!: String;
-  @Input() deleted!: ()=>void;
-
-  current!: any;
-
-  confirmDel = false;
 
   constructor(
     private router: Router,
     private http: HttpClient
-  ) { 
-  }
-
-  // deleteItem():void{
-  //   this.http.delete(`${API_URL}/deleteItem/${this.announcement.id}`, {withCredentials: true})
-  //   .subscribe(res=>{
-  //     console.log(res);
-  //     this.deleted();
-  //   })
-  // }
+  ) { }
 
   fixTitle(text:String):String{
     if(text.length > 25){

@@ -1,5 +1,7 @@
 import { createSelector } from "@ngrx/store";
 import { AppState } from "../app-state";
+import { adapter } from "./announcement.reducer";
+import { Announcement } from "../../../models/announcement";
 
 
 export const selectAnnouncementFeature = (state: AppState) => state.announcements;
@@ -19,7 +21,10 @@ export const selectPagesInfo = createSelector(
     (annState) => annState.pagesInfo
 )
 
+
 export const selectCurrentPage = createSelector(
     selectAnnouncementFeature,
-    (annState) => annState.entities
+    (annState) => Object.values(annState.entities)
+    .filter(ann => ann != null)
+    .filter((ann) => (ann?.page === annState.pagesInfo.selectedPage)? <Announcement>ann : false) // selektuju se samo entiteti aktivne stranice
 )

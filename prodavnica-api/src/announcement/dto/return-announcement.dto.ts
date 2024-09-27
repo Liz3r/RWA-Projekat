@@ -1,4 +1,4 @@
-export interface Announcement{
+export class RetAnnouncementDto  {
     id: number
     title: string
     category: number
@@ -9,5 +9,6 @@ export interface Announcement{
     userId?: number
     description: string
     picture: string
-    page?: number
+    page: number
 }
+    

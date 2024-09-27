@@ -8,6 +8,7 @@ import { StringToNumber } from 'src/helpers/helpers';
 import { UserService } from 'src/user/user.service';
 import { Category } from 'src/category/entities/category.entity';
 import { User } from 'src/user/entities/user.entity';
+import { RetAnnouncementDto } from './dto/return-announcement.dto';
 
 @Injectable()
 export class AnnouncementService {
@@ -62,9 +63,13 @@ export class AnnouncementService {
 
   async findPageInAllAnnouncements(page: number, pageSize:number) {
 
+    if(!page)
+      throw new HttpException('no page provided', HttpStatus.BAD_REQUEST)
+
     let res = await this.announcementRepository.createQueryBuilder('announcements').orderBy('id').skip(page*pageSize).take(pageSize).getMany();
-    
-    return res;
+    let ret =  res.map(announcement => ({...announcement, page: page}));
+    console.log(ret);
+    return ret;
   }
 
   findOne(id: number) {
