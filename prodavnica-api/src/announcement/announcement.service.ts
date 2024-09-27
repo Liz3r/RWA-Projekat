@@ -67,9 +67,9 @@ export class AnnouncementService {
       throw new HttpException('no page provided', HttpStatus.BAD_REQUEST)
 
     let res = await this.announcementRepository.createQueryBuilder('announcements').orderBy('id').skip(page*pageSize).take(pageSize).getMany();
-    let ret =  res.map(announcement => ({...announcement, page: page}));
-    console.log(ret);
-    return ret;
+    //let ret =  res.map(announcement => ({...announcement, page: page}));
+
+    return res.map(announcement => ({...announcement, page: page}));
   }
 
   findOne(id: number) {

@@ -32,6 +32,28 @@ export class AnnouncementComponent {
     return text;
   }
 
+  generateDateMessage(date: Date): string{
+    
+
+    const diff = Math.abs(Date.now() - date.getTime());
+    console.log({a: date.getTime(),b: Date.now(), c: diff});
+    if(diff < 60*1000) //jedan minut
+        return 'Just now';
+
+    if(diff < 60*60*1000){ //jedan sat
+        let num = Math.floor(diff/(60*1000));
+        return (num == 1)? num + ' minute ago' : num + ' minutes ago';
+    }
+
+    if(diff < 24*60*60*1000){ //jedan dan
+        let num = Math.floor(diff/(60*60*1000));
+        return (num == 1)? num + ' hour ago' : num + ' hours ago';
+    }
+
+    let num = Math.floor(diff/(24*60*60*1000));
+    return (num == 1)? num + ' day ago' : num + ' days ago';
+  }
+
   priceToString(): String{
     var retPrice = '';
     var priceStr = this.announcement.price.toString();

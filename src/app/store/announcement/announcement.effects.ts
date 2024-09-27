@@ -27,7 +27,7 @@ export class AnnouncementEffects{
             //if(selectedCateg === null){
                 return this.announcementService.getAnnouncementsPageAll(page, pagesInfo.itemsPerPage).pipe(
                     map((announcements) => {
-                        announcements.forEach(ann => ann.page = Number(ann.page));
+                        announcements.forEach(ann => {ann.page = Number(ann.page); ann.datePosted = new Date(ann.datePosted); return ann});
                         console.log(announcements);
                         if(announcements.length == 0)
                             return AnnouncementActions.loadAnnouncementsPageFailure()
