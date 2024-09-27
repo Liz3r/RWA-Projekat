@@ -25,13 +25,17 @@ export class AnnouncementEffects{
         switchMap(([{page},selectedCateg, pagesInfo]) => {
             console.log("from effect");
             //if(selectedCateg === null){
+                if(page < 0)
+                    return of(AnnouncementActions.loadAnnouncementsPageFailure());
+
                 return this.announcementService.getAnnouncementsPageAll(page, pagesInfo.itemsPerPage).pipe(
-                    map((announcements) => {
+                    map(({announcements,count}) => {
+
                         announcements.forEach(ann => {ann.page = Number(ann.page); ann.datePosted = new Date(ann.datePosted); return ann});
-                        console.log(announcements);
-                        if(announcements.length == 0)
-                            return AnnouncementActions.loadAnnouncementsPageFailure()
-                        return AnnouncementActions.loadAnnouncementsPageSuccess({items: announcements, newSelectedPage: page})
+                        console.log(announcements, count);
+
+
+                        return AnnouncementActions.loadAnnouncementsPageSuccess({items: announcements, newSelectedPage: page, count: count})
                     }),
                     catchError((err) => {
                         return of(AnnouncementActions.loadAnnouncementsPageFailure())

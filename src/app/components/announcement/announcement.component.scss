@@ -1,6 +1,6 @@
 img{
     width: 130px;
-    height: 120px;
+    height: 100px;
     border: 1px solid #E0E7EF;
 }
 
@@ -23,7 +23,7 @@ div.item-container{
     margin-right: auto;
     margin-top: 10px;
 
-    width: 850px;
+    width: 700px;
     height: fit-content;
     cursor: pointer;
 }
@@ -80,7 +80,7 @@ div.item-container:hover{
     align-items: start;
 
     width: 200px;
-    height: 120px;
+    height: 100px;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -91,8 +91,8 @@ a,p{
 }
 
 .cena-div{
-    width: 200px;
-    height: 120px;
+    width: 180px;
+    height: 100px;
 }
 
 .delete-div{
@@ -124,7 +124,7 @@ a,p{
     flex-direction: column;
     justify-content: start;
     width: 130px;
-    height: 120px;
+    height: 100px;
     color: #6C757D;
 }
 

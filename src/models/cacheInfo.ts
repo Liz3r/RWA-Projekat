@@ -3,5 +3,6 @@ export interface CacheInfo{
     lastPageIndex: number,
     itemsPerPage: number,
     cachedPagesLimit: number ,
-    selectedPage: number
+    selectedPage: number,
+    totalItems: number | null
 }

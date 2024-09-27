@@ -34,9 +34,8 @@ export class AnnouncementComponent {
 
   generateDateMessage(date: Date): string{
     
-
     const diff = Math.abs(Date.now() - date.getTime());
-    console.log({a: date.getTime(),b: Date.now(), c: diff});
+
     if(diff < 60*1000) //jedan minut
         return 'Just now';
 

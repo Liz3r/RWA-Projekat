@@ -8,11 +8,12 @@ import { Announcement } from "../../../models/announcement";
 
 //---------pomocna struktura za rad sa kesiranjem stranica
 export const InitCacheInfo: CacheInfo = {
-    presentPages: [],
+    presentPages: new Array(10).fill(null),
     lastPageIndex: 0,
-    itemsPerPage: 7,
+    itemsPerPage: 2,
     cachedPagesLimit: 5,
-    selectedPage: 0
+    selectedPage: 0,
+    totalItems: null
 }
 //------------------
 
@@ -38,7 +39,23 @@ export const AnnouncementReducer = createReducer(
     on(Actions.loadCategoriesSuccess, (state, {categories}) => ({...state, categories: categories})),
     on(Actions.loadCategoriesFailure, (state) => ({...state, categories: []})),
     on(Actions.loadAnnouncementsPageAll, (state) => ({...state, isLoading: true})),
-    on(Actions.loadAnnouncementsPageSuccess, (state, 
-        {items, newSelectedPage}) => adapter.addMany(items, {...state, isLoading: false, pagesInfo: {...state.pagesInfo, selectedPage: newSelectedPage}})),
+    on(Actions.loadAnnouncementsPageSuccess, 
+        (state, {items, newSelectedPage, count}) => {
+            let newPagesInfo: CacheInfo = {...state.pagesInfo };
+            newPagesInfo.selectedPage = newSelectedPage;
+            if(newPagesInfo.lastPageIndex >= newPagesInfo.itemsPerPage){
+                newPagesInfo.lastPageIndex = 0;
+
+            }else{
+                newPagesInfo.lastPageIndex++;
+            }
+            //newPagesInfo.presentPages[newPagesInfo.lastPageIndex] = newSelectedPage;
+            let presentPagesUpdated = [...newPagesInfo.presentPages];
+            presentPagesUpdated[newPagesInfo.lastPageIndex] = newSelectedPage;
+            newPagesInfo.presentPages = presentPagesUpdated;
+            newPagesInfo.totalItems = count;
+
+            return adapter.addMany(items, {...state, isLoading: false, pagesInfo: newPagesInfo});
+        }),
     on(Actions.loadAnnouncementsPageFailure, (state) => ({...state, isLoading: false}))
 )

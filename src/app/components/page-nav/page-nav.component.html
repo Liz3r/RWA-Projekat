@@ -1,1 +1,8 @@
-<p>page-nav works!</p>
+<div class="page-nav-container">
+
+    <div *ngIf="maxPages && curentPage && curentPage > 0" (click)="pageSelected(curentPage-1)" class="arrow left-arrow select-page"></div>
+    
+    <div *ngFor="let p of pages" [ngClass]="{'selected':p == curentPage}" class="select-page" (click)="pageSelected(p)">{{p+1}}</div>
+
+    <div *ngIf="maxPages && curentPage != null && curentPage < maxPages-1" (click)="pageSelected(curentPage+1)" class="arrow right-arrow select-page"></div>
+</div>
