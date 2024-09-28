@@ -43,13 +43,11 @@ export const AnnouncementReducer = createReducer(
         (state, {items, newSelectedPage, count}) => {
             let newPagesInfo: CacheInfo = {...state.pagesInfo };
             newPagesInfo.selectedPage = newSelectedPage;
-            if(newPagesInfo.lastPageIndex >= newPagesInfo.itemsPerPage){
+            if(newPagesInfo.lastPageIndex >= newPagesInfo.itemsPerPage)
                 newPagesInfo.lastPageIndex = 0;
-
-            }else{
+            else
                 newPagesInfo.lastPageIndex++;
-            }
-            //newPagesInfo.presentPages[newPagesInfo.lastPageIndex] = newSelectedPage;
+            
             let presentPagesUpdated = [...newPagesInfo.presentPages];
             presentPagesUpdated[newPagesInfo.lastPageIndex] = newSelectedPage;
             newPagesInfo.presentPages = presentPagesUpdated;
@@ -57,5 +55,6 @@ export const AnnouncementReducer = createReducer(
 
             return adapter.addMany(items, {...state, isLoading: false, pagesInfo: newPagesInfo});
         }),
-    on(Actions.loadAnnouncementsPageFailure, (state) => ({...state, isLoading: false}))
+    on(Actions.loadAnnouncementsPageFailure, (state) => ({...state, isLoading: false})),
+    on(Actions.loadAnnouncementPageFromCache, (state, {newSelectedPage}) => ({...state, pagesInfo: {...state.pagesInfo, selectedPage: newSelectedPage}}))
 )

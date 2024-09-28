@@ -34,5 +34,10 @@ export const loadAnnouncementsPageFailure = createAction(
     '[All Announcements] Loading Failed'
 )
 
+export const loadAnnouncementPageFromCache = createAction(
+    '[All Announcements] Loaded From Cache',
+    props<{newSelectedPage: number}>()
+)
+
 //Category selected -
 

@@ -1,8 +1,10 @@
+
 <div class="page-nav-container">
-
-    <div *ngIf="maxPages && curentPage && curentPage > 0" (click)="pageSelected(curentPage-1)" class="arrow left-arrow select-page"></div>
-    
-    <div *ngFor="let p of pages" [ngClass]="{'selected':p == curentPage}" class="select-page" (click)="pageSelected(p)">{{p+1}}</div>
-
-    <div *ngIf="maxPages && curentPage != null && curentPage < maxPages-1" (click)="pageSelected(curentPage+1)" class="arrow right-arrow select-page"></div>
+    <div class="placeholder-arrow-div">
+        <div *ngIf="selectedPage > 0" (click)="selectPage(selectedPage-1)" class="arrow left-arrow select-page-arrow"></div>
+    </div>
+        <div *ngFor="let page of pages" (click)="selectPage(page.value)" [class]="'select-page ' + (selectedPage === page.value? 'selected': '')" >{{page.text}}</div>
+    <div class="placeholder-arrow-div">
+        <div *ngIf="selectedPage < pagesTotal-1" (click)="selectPage(selectedPage+1)" class="arrow right-arrow select-page-arrow"></div>
+    </div>
 </div>

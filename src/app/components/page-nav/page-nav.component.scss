@@ -10,12 +10,17 @@ div.page-nav-container{
     flex-wrap: wrap;
 
     height: 40px;
+    width: 80%;
 
     //background-color: red;
 }
 
+div.placeholder-arrow-div{
+    width: 35px;
+}
 
-div.select-page{
+
+div.select-page, div.select-page-arrow{
     position: relative;
     width: 15px;
     height: 15px;
@@ -32,26 +37,31 @@ div.select-page{
     border: 1px solid #D0D7DE;
 }
 
+div.select-page-arrow:hover{
+    cursor: pointer;
+}
+
 div.select-page:hover{
-    background-color: rgb(60, 214, 80);
-    color: white;
+    //background-color: rgb(112, 226, 127);
+    //color: white;
+    outline: rgb(96, 177, 224) solid 1px;
     cursor: pointer;
 }
 
 div.selected{
-    background-color: rgb(77, 199, 93);
+    background-color: rgb(96, 177, 224);
     color: white;
 }
 
-div.left-arrow:after:before{
-    position: absolute;
-    display: block;
+// div.left-arrow:after:before{
+//     position: absolute;
+//     display: block;
 
-    content: '';
-    width: 20px;
-    height: 5px;
-    background-color: black;
-}
+//     content: '';
+//     width: 20px;
+//     height: 5px;
+//     background-color: black;
+// }
 
 div.arrow{
     border: none;

@@ -16,8 +16,8 @@
         
     </div>
     <div class="main-div">
+        <app-page-nav></app-page-nav>
         <div *ngFor="let ann of announcements$ | async">
-
             <app-announcement  [announcement]="ann"></app-announcement>
         </div>
     </div> 

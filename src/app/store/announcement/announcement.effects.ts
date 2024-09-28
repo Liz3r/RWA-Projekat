@@ -28,6 +28,9 @@ export class AnnouncementEffects{
                 if(page < 0)
                     return of(AnnouncementActions.loadAnnouncementsPageFailure());
 
+                if(pagesInfo.presentPages.includes(page))
+                    return of(AnnouncementActions.loadAnnouncementPageFromCache({newSelectedPage: page}));
+
                 return this.announcementService.getAnnouncementsPageAll(page, pagesInfo.itemsPerPage).pipe(
                     map(({announcements,count}) => {
 
