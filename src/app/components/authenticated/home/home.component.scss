@@ -23,6 +23,7 @@ footer{
 .left-div{
     display: flex;
     flex: 0.5;
+    justify-content: end;
 }
 .main-div{
     display: flex;
@@ -33,6 +34,7 @@ footer{
 .right-div{
     display: flex;
     flex: 0.5;
+    justify-content: start;
 }
 //--
 .search-div{
@@ -87,7 +89,7 @@ footer{
 }
 
 .add-btn{
-    width: fit-content;
+    width: 150px;
     height: 36px;
     background-color: #F6AE2D;
     border: none;
@@ -100,4 +102,62 @@ footer{
 .add-btn:hover{
     background-color: #eba72a;
     cursor: pointer;
+}
+//-----------------------
+.account-div{
+    min-width: 160px;
+    height: 200px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #D0D7DE;
+    border-radius: 3px;
+    margin-left: 20px;
+    margin-top: 50px;
+}
+
+.horizontal-separator{
+    height: 1px;
+    width: 130px;
+    background: #ccd8e4;
+}
+
+.account-label{
+    color: rgb(54, 56, 58);
+    font-size: 18px;
+    font-family: PT Sans,sans-serif;
+    font-weight: 400;
+}
+
+//-----------------------
+.categories-div{
+    min-width: 130px;
+    height: 500px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #D0D7DE;
+    border-radius: 3px;
+    margin-right: 20px;
+    margin-top: 50px;
+}
+
+.horizontal-separator{
+    height: 1px;
+    width: 130px;
+    background: #ccd8e4;
+}
+
+.category-label{
+    color: rgb(54, 56, 58);
+    font-size: 18px;
+    font-family: PT Sans,sans-serif;
+    font-weight: 400;
+}
+
+.categ-option{
+    color: rgb(38, 61, 85);
+    cursor: pointer;
+}
+.categ-option:hover{
+    background-color: rgba(146, 189, 235, 0.582);
+    text-decoration: underline;
 }

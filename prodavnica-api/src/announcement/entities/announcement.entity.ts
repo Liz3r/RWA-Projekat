@@ -25,7 +25,7 @@ export class Announcement{
     @Column({
         unique: false,
         nullable: false,
-        length: 25
+        length: 75
     })
     title: string;
 

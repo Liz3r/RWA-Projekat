@@ -34,11 +34,11 @@ export class AddAnnouncementComponent implements OnInit{
 
   newAnnouncementForm = new FormGroup({
     picture: new FormControl<File | null>(null,[Validators.required]),
-    title: new FormControl<string>('',[Validators.required, Validators.maxLength(25)]),
+    title: new FormControl<string>('',[Validators.required, Validators.maxLength(75)]),
     currency: new FormControl<string>('rsd',[Validators.required]),
     condition: new FormControl<string>('new',[Validators.required]),
     price: new FormControl<string>('',[Validators.required, isNumber(), Validators.maxLength(10)]),
-    description: new FormControl<string>('',[Validators.required, Validators.maxLength(5000)]),
+    description: new FormControl<string>('',[Validators.required, Validators.maxLength(7000)]),
     category: new FormControl<number | null>(null, [Validators.nullValidator])
   });
 
@@ -103,7 +103,10 @@ export class AddAnnouncementComponent implements OnInit{
       console.log(this.newAnnouncementForm.value.picture);
       sendData.set('picture', this.newAnnouncementForm.value.picture, this.newAnnouncementForm.value.picture?.name)
       this.http.post(`${API_URL}/announcement/newAnnouncement`, sendData, {withCredentials: true})
-      .subscribe((res) => console.log(res));
+      .subscribe((res) => {
+        this.newAnnouncementForm.reset();
+        this.pictureData = null;
+      });
     }
   }
 

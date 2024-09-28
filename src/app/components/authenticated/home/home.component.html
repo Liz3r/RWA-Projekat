@@ -13,7 +13,11 @@
 
 <div class="content-div">
     <div class="left-div">
-        
+        <div class="categories-div">
+            <label class="category-label">Category</label>
+            <div class="horizontal-separator"></div>
+            <div *ngFor="let categ of allCategories$ | async" class="categ-option">{{categ.title}}</div>
+        </div>
     </div>
     <div class="main-div">
         <app-page-nav></app-page-nav>
@@ -22,7 +26,10 @@
         </div>
     </div> 
     <div class="right-div">
-
+        <div class="account-div">
+            <label class="account-label">Account</label>
+            <div class="horizontal-separator"></div>
+        </div>
     </div>  
 </div>
 

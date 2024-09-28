@@ -20,14 +20,14 @@ export class AnnouncementComponent {
 
   fixTitle(text:String):String{
     if(text.length > 25){
-      return text.slice(0,61) + "...";
+      return text.slice(0,30) + "...";
     }
     return text;
   }
 
   fixDescription(text:String):String{
     if(text.length > 60){
-      return text.slice(0,90) + "...";
+      return text.slice(0,60) + "...";
     }
     return text;
   }
