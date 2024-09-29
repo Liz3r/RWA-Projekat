@@ -25,10 +25,13 @@ export class PageNavComponent implements OnInit{
   ngOnInit(): void {
     this.cacheInfoSub$ = this.store.select(selectPagesInfo)
     .subscribe((cacheInfo) => {
-      if(!cacheInfo.totalItems)
+      if(cacheInfo.totalItems === null)
         return;
 
-      this.pagesTotal = Math.ceil(cacheInfo.totalItems/cacheInfo.itemsPerPage);
+      if(cacheInfo.totalItems !== 0)
+        this.pagesTotal = Math.ceil(cacheInfo.totalItems/cacheInfo.itemsPerPage);
+      else
+        this.pagesTotal = 1;
       this.selectedPage = cacheInfo.selectedPage;
       this.pages = Array(this.pagesTotal).fill(0).map((n,i) => ({value: i, text: i+1}));
     });
