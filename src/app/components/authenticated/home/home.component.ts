@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppState } from '../../../store/app-state';
 import { select, Store } from '@ngrx/store';
-import { loadAnnouncementsPageAll, loadCategories } from '../../../store/announcement/announcement.actions';
+import { loadAnnouncementsPageAll, loadCategories, resetCache, selectCategory } from '../../../store/announcement/announcement.actions';
 import { Announcement } from '../../../../models/announcement';
 import { from, map, Observable, of, switchMap } from 'rxjs';
 import { selectCategoriesList, selectCurrentPage } from '../../../store/announcement/announcement.selector';
@@ -23,10 +23,14 @@ export class HomeComponent implements OnInit{
   
   ngOnInit(): void {
     this.announcements$ = this.store.select(selectCurrentPage);
-    this.store.select(selectCurrentPage).subscribe(el => console.log(el));
     this.store.dispatch(loadAnnouncementsPageAll({page: 0}));
     this.store.dispatch(loadCategories());
     this.allCategories$ = this.store.select(selectCategoriesList);
+  }
+
+  selectCategory(id: number | null){
+    this.store.dispatch(resetCache());
+    this.store.dispatch(selectCategory({categId: id}));
   }
 
   onAddNewAnnouncement(){

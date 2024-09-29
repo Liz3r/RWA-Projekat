@@ -16,7 +16,8 @@
         <div class="categories-div">
             <label class="category-label">Category</label>
             <div class="horizontal-separator"></div>
-            <div *ngFor="let categ of allCategories$ | async" class="categ-option">{{categ.title}}</div>
+            <div (click)="selectCategory(null)" class="categ-option">All</div>
+            <div *ngFor="let categ of allCategories$ | async" (click)="selectCategory(categ.id)" class="categ-option">{{categ.title}}</div>
         </div>
     </div>
     <div class="main-div">

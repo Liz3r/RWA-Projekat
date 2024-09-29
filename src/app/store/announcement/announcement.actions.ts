@@ -17,6 +17,22 @@ export const loadCategoriesFailure = createAction(
     '[Announcements] Loading Failed'
 );
 
+export const selectCategory = createAction(
+    '[Announcements] Select Category',
+    props<{categId: number | null}>()
+)
+
+export const selectCategorySuccess = createAction(
+    '[Announcements] Select Category Succeeded',
+    props<{items: Announcement[], newSelectedPage: number, count: number,categId: number | null}>()
+);
+
+
+export const selectCategoryFailure = createAction(
+    '[Announcements] Select Category Failed'
+);
+
+
 //Announcement actions
 
 //Category not selected - search string empty
@@ -39,5 +55,8 @@ export const loadAnnouncementPageFromCache = createAction(
     props<{newSelectedPage: number}>()
 )
 
+export const resetCache = createAction(
+    '[All Announcements] Reset Cache'
+)
 //Category selected -
 

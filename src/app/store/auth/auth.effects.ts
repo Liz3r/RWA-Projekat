@@ -61,7 +61,6 @@ export class AuthEffects{
                         user_email: res.user_email,
                         first_name: res.user_firstname
                     };
-                    console.log(res);
                     return AuthActions.validToken({user});
                 }),
                 catchError(() => of(AuthActions.invalidToken()))

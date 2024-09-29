@@ -66,8 +66,24 @@ export class AnnouncementService {
     if(!page)
       throw new HttpException('no page provided', HttpStatus.BAD_REQUEST)
 
-    let [announcements, count] = await this.announcementRepository.createQueryBuilder('announcements').orderBy('id').skip(page*pageSize).take(pageSize).getManyAndCount();
-    //let ret =  res.map(announcement => ({...announcement, page: page}));
+    let [announcements, count] = await this.announcementRepository
+    .createQueryBuilder('announcements')
+    .orderBy('id').skip(page*pageSize)
+    .take(pageSize)
+    .getManyAndCount();
+
+    return {announcements: announcements.map(announcement => ({...announcement, page: page})), count: count};
+  }
+
+  async findPageInCategory(page: number, pageSize: number, categoryId: number){
+    let [announcements, count] = await this.announcementRepository
+    .createQueryBuilder('announcement')
+    .where('announcement.categoryId = :categId')
+    .orderBy('id')
+    .skip(page*pageSize)
+    .take(pageSize)
+    .setParameters({categId: categoryId})
+    .getManyAndCount();
 
     return {announcements: announcements.map(announcement => ({...announcement, page: page})), count: count};
   }

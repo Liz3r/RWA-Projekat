@@ -23,30 +23,49 @@ export class AnnouncementEffects{
         ofType(AnnouncementActions.loadAnnouncementsPageAll),
         withLatestFrom(this.store.select(selectedCategory), this.store.select(selectPagesInfo)),
         switchMap(([{page},selectedCateg, pagesInfo]) => {
-            console.log("from effect");
-            //if(selectedCateg === null){
-                if(page < 0)
-                    return of(AnnouncementActions.loadAnnouncementsPageFailure());
+            if(page < 0)
+                return of(AnnouncementActions.loadAnnouncementsPageFailure());
 
-                if(pagesInfo.presentPages.includes(page))
-                    return of(AnnouncementActions.loadAnnouncementPageFromCache({newSelectedPage: page}));
-
+            if(pagesInfo.presentPages.includes(page))
+                return of(AnnouncementActions.loadAnnouncementPageFromCache({newSelectedPage: page}));
+            
+            if(selectedCateg === null){
                 return this.announcementService.getAnnouncementsPageAll(page, pagesInfo.itemsPerPage).pipe(
                     map(({announcements,count}) => {
-
                         announcements.forEach(ann => {ann.page = Number(ann.page); ann.datePosted = new Date(ann.datePosted); return ann});
-                        console.log(announcements, count);
-
-
                         return AnnouncementActions.loadAnnouncementsPageSuccess({items: announcements, newSelectedPage: page, count: count})
                     }),
                     catchError((err) => {
                         return of(AnnouncementActions.loadAnnouncementsPageFailure())
                     })
                 );
-            //}else{
+            }else{
+                return this.announcementService.getAnnouncementsPageCategory(page, pagesInfo.itemsPerPage, selectedCateg).pipe(
+                    map(({announcements,count}) => {
+                        announcements.forEach(ann => {ann.page = Number(ann.page); ann.datePosted = new Date(ann.datePosted); return ann});
+                        return AnnouncementActions.loadAnnouncementsPageSuccess({items: announcements, newSelectedPage: page, count: count})
+                    }),
+                    catchError((err) => {
+                        return of(AnnouncementActions.loadAnnouncementsPageFailure())
+                    })
+                );
+            }
+        })
+    ))
 
-            //}
+    selectCategory$ = createEffect(() => this.actions$.pipe(
+        ofType(AnnouncementActions.selectCategory),
+        withLatestFrom(this.store.select(selectPagesInfo)),
+        switchMap(([{categId}, pagesInfo]) => {
+            return this.announcementService.getAnnouncementsPageCategory(0, pagesInfo.itemsPerPage, categId).pipe(
+                map(({announcements,count}) => {
+                    announcements.forEach(ann => {ann.page = Number(ann.page); ann.datePosted = new Date(ann.datePosted); return ann});
+                    return AnnouncementActions.selectCategorySuccess({items: announcements, newSelectedPage: 0, count: count,categId: categId});
+                }),
+                catchError((err) => {
+                    return of(AnnouncementActions.selectCategoryFailure())
+                })
+            );
         })
     ))
 
@@ -63,13 +82,6 @@ export class AnnouncementEffects{
                         //provera da li je vraceni objekat iteratable
                         if(!categories[Symbol.iterator])
                             return AnnouncementActions.loadCategoriesFailure()
-                        //provera da li su svi clanovi niza imaju id i title
-                        
-                        // for(let i = 0; i < categories.length; i++){
-                        //     if(typeof(categories[i].id) !== 'number' || typeof(categories[i].title) !== 'string')
-                        //         return CategoryActions.fetchFailure()
-                        // }
-                        // console.log(categories);
                         return AnnouncementActions.loadCategoriesSuccess({categories: categories});
                     }),
                     catchError((err) => {

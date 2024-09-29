@@ -28,6 +28,13 @@ export class AnnouncementController {
   findAll(@Param('page') page: number, @Param('pageSize') pageSize: number) {
     return this.announcementService.findPageInAllAnnouncements(page, pageSize);
   }
+  @Get('getPageInCategory/:page/:pageSize/:categoryId')
+  findCategory(@Param('page') page: number, @Param('pageSize') pageSize: number, @Param('categoryId') categ) {
+    //console.log(categ == 'null');
+    if(categ === 'null')
+      return this.announcementService.findPageInAllAnnouncements(page, pageSize);
+     return this.announcementService.findPageInCategory(page, pageSize, categ);
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

@@ -1,1 +1,1 @@
-INSERT INTO category (categoryTitle) VALUES ("Jewelry");
+INSERT INTO category (categoryTitle) VALUES ('Pets');
