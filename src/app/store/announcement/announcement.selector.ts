@@ -11,6 +11,7 @@ export const selectCategoriesList = createSelector(
     (announcementState) => announcementState.categories
 )
 
+
 export const selectedCategory = createSelector(
     selectAnnouncementFeature,
     (annState) => annState.selectedCategoryId

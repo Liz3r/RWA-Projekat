@@ -28,8 +28,9 @@ footer{
 .main-div{
     display: flex;
     flex-direction: column;
-    flex: 1;
+   
     height: 100vh;
+    width: 702px;
 }
 .right-div{
     display: flex;
@@ -159,5 +160,9 @@ footer{
 }
 .categ-option:hover{
     background-color: rgba(146, 189, 235, 0.582);
+    text-decoration: underline;
+}
+
+.selected-categ{
     text-decoration: underline;
 }

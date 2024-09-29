@@ -36,6 +36,24 @@ export class AnnouncementController {
      return this.announcementService.findPageInCategory(page, pageSize, categ);
   }
 
+  @Get('getPageInSearch/:page/:pageSize/:categoryId/:search')
+  findSearch(@Param('page') page: number, @Param('pageSize') pageSize: number, @Param('categoryId') categ, @Param('search') search) {
+
+    if(categ === 'null' && !(search === 'null' || search === '')){
+      return this.announcementService.findPageInSearchWithoutCategory(page, pageSize, search);
+    }
+    if(categ !== 'null' && (search === 'null' || search === '')){
+      return this.announcementService.findPageInCategory(page, pageSize, categ);
+    }
+    if(categ !== 'null' && (search === 'null' || search === '')){
+      return this.announcementService.findPageInAllAnnouncements(page, pageSize);
+    }
+
+    return this.announcementService.findPageInSearchWithCategory(page, pageSize, categ, search);
+  }
+
+
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.announcementService.findOne(+id);

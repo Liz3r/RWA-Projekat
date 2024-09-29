@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { loadAnnouncementsPageAll, loadCategories, resetCache, selectCategory } from '../../../store/announcement/announcement.actions';
 import { Announcement } from '../../../../models/announcement';
 import { from, map, Observable, of, switchMap } from 'rxjs';
-import { selectCategoriesList, selectCurrentPage } from '../../../store/announcement/announcement.selector';
+import { selectCategoriesList, selectCurrentPage, selectedCategory } from '../../../store/announcement/announcement.selector';
 import { Category } from '../../../../models/category';
 
 

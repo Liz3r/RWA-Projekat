@@ -5,31 +5,31 @@ import { Announcement } from "../../../models/announcement";
 
 //category actions
 export const loadCategories = createAction(
-    '[Announcements] Load Categories'
+    '[Category] Load Categories'
 );
 
 export const loadCategoriesSuccess = createAction(
-    '[Announcements] Loading Succeeded',
+    '[Category] Loading Succeeded',
     props<{categories: Category[]}>()
 );
 
 export const loadCategoriesFailure = createAction(
-    '[Announcements] Loading Failed'
+    '[Category] Loading Failed'
 );
 
 export const selectCategory = createAction(
-    '[Announcements] Select Category',
+    '[Category] Select Category',
     props<{categId: number | null}>()
 )
 
 export const selectCategorySuccess = createAction(
-    '[Announcements] Select Category Succeeded',
+    '[Category] Select Succeeded',
     props<{items: Announcement[], newSelectedPage: number, count: number,categId: number | null}>()
 );
 
 
 export const selectCategoryFailure = createAction(
-    '[Announcements] Select Category Failed'
+    '[Category] Select Failed'
 );
 
 
@@ -37,26 +37,42 @@ export const selectCategoryFailure = createAction(
 
 //Category not selected - search string empty
 export const loadAnnouncementsPageAll = createAction(
-    '[All Announcements] Load Page',
+    '[Announcements] Load Page',
     props<{page: number}>()
 )
 
 export const loadAnnouncementsPageSuccess = createAction(
-    '[All Announcements] Loading Succeeded',
+    '[Announcements] Loading Succeeded',
     props<{items: Announcement[], newSelectedPage: number, count: number}>()
 )
 
 export const loadAnnouncementsPageFailure = createAction(
-    '[All Announcements] Loading Failed'
+    '[Announcements] Loading Failed'
 )
 
 export const loadAnnouncementPageFromCache = createAction(
-    '[All Announcements] Loaded From Cache',
+    '[Announcements] Loaded From Cache',
     props<{newSelectedPage: number}>()
 )
 
+//search
+
+export const searchAnnouncements = createAction(
+    '[Announcements] Search',
+    props<{search: string}>()
+)
+
+export const searchAnnouncementsSuccess = createAction(
+    '[Announcements] Search Succeeded',
+    props<{items: Announcement[], newSelectedPage: number, count: number, categId: number | null, search: string}>()
+)
+
+export const searchAnnouncementsFailure = createAction(
+    '[Announcements] Search Failed'
+)
+
 export const resetCache = createAction(
-    '[All Announcements] Reset Cache'
+    '[Cache] Reset Cache'
 )
 //Category selected -
 

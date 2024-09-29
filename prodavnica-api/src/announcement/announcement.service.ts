@@ -88,6 +88,35 @@ export class AnnouncementService {
     return {announcements: announcements.map(announcement => ({...announcement, page: page})), count: count};
   }
 
+  async findPageInSearchWithCategory(page: number, pageSize: number, categoryId: number | null, search: string){
+
+      let [announcements, count] = await this.announcementRepository
+      .createQueryBuilder('announcement')
+      .where('announcement.categoryId = :categId')
+      .andWhere('announcement.title like :searchString')
+      .orderBy('id')
+      .skip(page*pageSize)
+      .take(pageSize)
+      .setParameters({categId: categoryId, searchString: `%${search}%`})
+      .getManyAndCount();
+    
+    return {announcements: announcements.map(announcement => ({...announcement, page: page})), count: count};
+  }
+
+  async findPageInSearchWithoutCategory(page: number, pageSize: number, search: string){
+
+    let [announcements, count] = await this.announcementRepository
+    .createQueryBuilder('announcement')
+    .where('announcement.title like :searchString')
+    .orderBy('id')
+    .skip(page*pageSize)
+    .take(pageSize)
+    .setParameters({searchString: `%${search}%`})
+    .getManyAndCount();
+  
+  return {announcements: announcements.map(announcement => ({...announcement, page: page})), count: count};
+}
+
   findOne(id: number) {
     return `This action returns a #${id} announcement`;
   }

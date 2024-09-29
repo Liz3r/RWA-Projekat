@@ -24,6 +24,7 @@ export const adapter: EntityAdapter<Announcement> = createEntityAdapter<Announce
 export interface AnnouncementState extends EntityState<Announcement>{
     categories: Category[],
     selectedCategoryId: number | null,
+    searchString: string | null,
     isLoading:  boolean,
     pagesInfo: CacheInfo
 }
@@ -31,6 +32,7 @@ export interface AnnouncementState extends EntityState<Announcement>{
 export const InitialAnnouncementState: AnnouncementState = adapter.getInitialState({
     categories: [],
     selectedCategoryId: null,
+    searchString: null,
     isLoading: false,
     pagesInfo: InitCacheInfo
 })

@@ -69,6 +69,24 @@ export class AnnouncementEffects{
         })
     ))
 
+    // searchAnnouncements$ = createEffect(() => this.actions$.pipe(
+    //     ofType(AnnouncementActions.searchAnnouncements),
+    //     withLatestFrom(this.store.select(selectPagesInfo), this.store.select(selectedCategory)),
+    //     switchMap(([{search}, pagesInfo, selectedCateg]) => {
+    //         //----
+    //         return this.announcementService.getAnnouncementsPageCategory(0, pagesInfo.itemsPerPage, categId).pipe(
+    //             map(({announcements,count}) => {
+    //                 announcements.forEach(ann => {ann.page = Number(ann.page); ann.datePosted = new Date(ann.datePosted); return ann});
+    //                 return AnnouncementActions.selectCategorySuccess({items: announcements, newSelectedPage: 0, count: count,categId: categId});
+    //             }),
+    //             catchError((err) => {
+    //                 return of(AnnouncementActions.selectCategoryFailure())
+    //             })
+    //         );
+    //         //---
+    //     })
+    // ))
+
     loadingCategories$ = createEffect(() => 
         this.actions$.pipe(
             ofType(AnnouncementActions.loadCategories),
