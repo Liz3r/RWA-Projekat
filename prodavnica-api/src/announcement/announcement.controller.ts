@@ -39,13 +39,14 @@ export class AnnouncementController {
   @Get('getPageInSearch/:page/:pageSize/:categoryId/:search')
   findSearch(@Param('page') page: number, @Param('pageSize') pageSize: number, @Param('categoryId') categ, @Param('search') search) {
 
+    //console.log(categ === 'null', search === 'null');
     if(categ === 'null' && !(search === 'null' || search === '')){
       return this.announcementService.findPageInSearchWithoutCategory(page, pageSize, search);
     }
     if(categ !== 'null' && (search === 'null' || search === '')){
       return this.announcementService.findPageInCategory(page, pageSize, categ);
     }
-    if(categ !== 'null' && (search === 'null' || search === '')){
+    if(categ === 'null' && (search === 'null' || search === '')){
       return this.announcementService.findPageInAllAnnouncements(page, pageSize);
     }
 

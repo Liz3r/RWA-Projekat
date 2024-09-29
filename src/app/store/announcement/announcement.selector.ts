@@ -22,6 +22,10 @@ export const selectPagesInfo = createSelector(
     (annState) => annState.pagesInfo
 )
 
+export const selectSearchString = createSelector(
+    selectAnnouncementFeature,
+    (annState) => annState.searchString
+)
 
 export const selectCurrentPage = createSelector(
     selectAnnouncementFeature,

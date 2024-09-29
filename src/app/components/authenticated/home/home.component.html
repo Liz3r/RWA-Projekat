@@ -3,8 +3,8 @@
         <img src="assets/samplelogo.png" class="logo" alt="logo">
     </div>
     <div class="search-div">
-        <input class="search-bar" placeholder="Search..."/>
-        <button class="search-btn">
+        <input class="search-bar" [(ngModel)]="inputVal" placeholder="Search..."/>
+        <button class="search-btn" (click)="onSearch()">
             <i class="fa-solid fa-magnifying-glass fa-lg"></i>
         </button>
     </div>

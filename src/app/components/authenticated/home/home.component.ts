@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppState } from '../../../store/app-state';
 import { select, Store } from '@ngrx/store';
-import { loadAnnouncementsPageAll, loadCategories, resetCache, selectCategory } from '../../../store/announcement/announcement.actions';
+import { loadAnnouncementsPageAll, loadCategories, resetCache, searchAnnouncements, selectCategory } from '../../../store/announcement/announcement.actions';
 import { Announcement } from '../../../../models/announcement';
 import { from, map, Observable, of, switchMap } from 'rxjs';
 import { selectCategoriesList, selectCurrentPage, selectedCategory } from '../../../store/announcement/announcement.selector';
@@ -20,7 +20,8 @@ export class HomeComponent implements OnInit{
 
   announcements$!: Observable<Announcement[]>;
   allCategories$!: Observable<Category[]>;
-  
+  inputVal: string = '';
+
   ngOnInit(): void {
     this.announcements$ = this.store.select(selectCurrentPage);
     this.store.dispatch(loadAnnouncementsPageAll({page: 0}));
@@ -31,6 +32,11 @@ export class HomeComponent implements OnInit{
   selectCategory(id: number | null){
     this.store.dispatch(resetCache());
     this.store.dispatch(selectCategory({categId: id}));
+  }
+
+  onSearch(){
+    this.store.dispatch(resetCache());
+    this.store.dispatch(searchAnnouncements({search: this.inputVal}))
   }
 
   onAddNewAnnouncement(){

@@ -19,6 +19,13 @@ export class AnnouncementService {
   getAnnouncementsPageCategory(pageNum: number, itemsPerPageNum: number, categoryId: number | null): Observable<{announcements: Announcement[], count: number}>{
     return this.http.get<{announcements: Announcement[], count: number}>
     (`${API_URL}/announcement/getPageInCategory/${pageNum}/${itemsPerPageNum}/${categoryId}`,
-       {withCredentials: true, params: {page: pageNum, itemsPerPage: itemsPerPageNum}});
+       {withCredentials: true});
+  }
+
+  getAnnouncementsPageSearch(pageNum: number, itemsPerPageNum: number, categoryId: number | null, search: string | null): Observable<{announcements: Announcement[], count: number}>{
+    let srcFix = search === ''? null : search;
+    return this.http.get<{announcements: Announcement[], count: number}>
+    (`${API_URL}/announcement/getPageInSearch/${pageNum}/${itemsPerPageNum}/${categoryId}/${srcFix}`,
+       {withCredentials: true});
   }
 }

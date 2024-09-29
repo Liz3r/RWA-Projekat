@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/logreg/login/login.component';
 import { RegisterComponent } from './components/logreg/register/register.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from '@ngrx/store';
 import { ServerErrorInterceptor } from './interceptors/server-error.interceptor';
@@ -51,6 +51,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     RouterLink,
     RouterLinkActive,
     ReactiveFormsModule,
+    FormsModule,
     StoreModule.forRoot({serverErrors: serverErrorReducer, auth: authReducer, announcements: AnnouncementReducer}, {metaReducers}),
     StoreDevtoolsModule.instrument({
       maxAge: 25

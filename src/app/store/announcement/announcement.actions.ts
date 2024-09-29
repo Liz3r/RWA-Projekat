@@ -64,7 +64,7 @@ export const searchAnnouncements = createAction(
 
 export const searchAnnouncementsSuccess = createAction(
     '[Announcements] Search Succeeded',
-    props<{items: Announcement[], newSelectedPage: number, count: number, categId: number | null, search: string}>()
+    props<{items: Announcement[], newSelectedPage: number, count: number, categId: number | null, search: string | null}>()
 )
 
 export const searchAnnouncementsFailure = createAction(
