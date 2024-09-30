@@ -61,27 +61,7 @@ export const AnnouncementReducer = createReducer(
         }),
     on(Actions.loadAnnouncementsPageFailure, (state) => ({...state, isLoading: false})),
     on(Actions.loadAnnouncementPageFromCache, (state, {newSelectedPage}) => ({...state, pagesInfo: {...state.pagesInfo, selectedPage: newSelectedPage}})),
-    on(Actions.selectCategory, (state) => ({...state, isLoading: true})),
-    on(Actions.selectCategorySuccess, (state, {items, newSelectedPage, count, categId}) => {
-        let newPagesInfo: CacheInfo = {...InitCacheInfo};
-        let presentPagesUpdated = [...newPagesInfo.presentPages];
-        presentPagesUpdated[0] = newSelectedPage;
-        newPagesInfo.presentPages = presentPagesUpdated;
-        newPagesInfo.totalItems = count;
-        
-        return adapter.addMany(items, {...state, isLoading: false, pagesInfo: newPagesInfo, selectedCategoryId: categId});
-    }),
-    on(Actions.selectCategoryFailure, (state) => ({...state, isLoading: false})),
+    on(Actions.selectCategory, (state, {categId}) => ({...state, isLoading: true, selectedCategoryId: categId, searchString: null})),
     on(Actions.resetCache, (state) => adapter.removeAll({...state, pagesInfo: InitCacheInfo})),//{...state, pagesInfo: InitCacheInfo})
-    on(Actions.searchAnnouncements, (state) => ({...state, isLoading: true})),
-    on(Actions.searchAnnouncementsSuccess, (state, {items, newSelectedPage, count, categId, search}) => {
-        //ovo da se uradi
-        let newPagesInfo: CacheInfo = {...InitCacheInfo};
-        let presentPagesUpdated = [...newPagesInfo.presentPages];
-        presentPagesUpdated[0] = newSelectedPage;
-        newPagesInfo.presentPages = presentPagesUpdated;
-        newPagesInfo.totalItems = count;
-        
-        return adapter.addMany(items, {...state, isLoading: false, pagesInfo: newPagesInfo, selectedCategoryId: categId, searchString: search});
-    })
+    on(Actions.searchAnnouncements, (state, {search}) => ({...state, isLoading: true, searchString: search}))
 )

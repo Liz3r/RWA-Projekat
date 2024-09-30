@@ -22,17 +22,6 @@ export const selectCategory = createAction(
     props<{categId: number | null}>()
 )
 
-export const selectCategorySuccess = createAction(
-    '[Category] Select Succeeded',
-    props<{items: Announcement[], newSelectedPage: number, count: number,categId: number | null}>()
-);
-
-
-export const selectCategoryFailure = createAction(
-    '[Category] Select Failed'
-);
-
-
 //Announcement actions
 
 //Category not selected - search string empty
@@ -60,15 +49,6 @@ export const loadAnnouncementPageFromCache = createAction(
 export const searchAnnouncements = createAction(
     '[Announcements] Search',
     props<{search: string}>()
-)
-
-export const searchAnnouncementsSuccess = createAction(
-    '[Announcements] Search Succeeded',
-    props<{items: Announcement[], newSelectedPage: number, count: number, categId: number | null, search: string | null}>()
-)
-
-export const searchAnnouncementsFailure = createAction(
-    '[Announcements] Search Failed'
 )
 
 export const resetCache = createAction(

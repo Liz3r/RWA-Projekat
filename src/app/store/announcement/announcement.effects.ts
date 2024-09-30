@@ -63,38 +63,35 @@ export class AnnouncementEffects{
         })
     ))
 
-    selectCategory$ = createEffect(() => this.actions$.pipe(
-        ofType(AnnouncementActions.selectCategory),
-        withLatestFrom(this.store.select(selectPagesInfo)),
-        switchMap(([{categId}, pagesInfo]) => {
-            return this.announcementService.getAnnouncementsPageCategory(0, pagesInfo.itemsPerPage, categId).pipe(
-                map(({announcements,count}) => {
-                    announcements.forEach(ann => {ann.page = Number(ann.page); ann.datePosted = new Date(ann.datePosted); return ann});
-                    return AnnouncementActions.selectCategorySuccess({items: announcements, newSelectedPage: 0, count: count,categId: categId});
-                }),
-                catchError((err) => {
-                    return of(AnnouncementActions.selectCategoryFailure())
-                })
-            );
-        })
-    ))
-
-    searchAnnouncements$ = createEffect(() => this.actions$.pipe(
-        ofType(AnnouncementActions.searchAnnouncements),
-        withLatestFrom(this.store.select(selectPagesInfo), this.store.select(selectedCategory)),
-        switchMap(([{search}, pagesInfo, selectedCateg]) => {
-            return this.announcementService.getAnnouncementsPageSearch(0, pagesInfo.itemsPerPage, selectedCateg, search).pipe(
-                map(({announcements,count}) => {
-                    announcements.forEach(ann => {ann.page = Number(ann.page); ann.datePosted = new Date(ann.datePosted); return ann});
-                    return AnnouncementActions.searchAnnouncementsSuccess({items: announcements, newSelectedPage: 0, count: count,categId: selectedCateg, 
-                        search: (search === ''? null: search)});
-                }),
-                catchError((err) => {
-                    return of(AnnouncementActions.searchAnnouncementsFailure())
-                })
-            );
-        })
-    ))
+    // selectCategory$ = createEffect(() => this.actions$.pipe(
+    //     ofType(AnnouncementActions.selectCategory),
+    //     withLatestFrom(this.store.select(selectPagesInfo)),
+    //     switchMap(([{categId}, pagesInfo]) => {
+    //         return this.announcementService.getAnnouncementsPageCategory(0, pagesInfo.itemsPerPage, categId).pipe(
+    //             map(({announcements,count}) => {
+    //                 announcements.forEach(ann => {ann.page = Number(ann.page); ann.datePosted = new Date(ann.datePosted); return ann});
+    //                 return AnnouncementActions.selectCategorySuccess({items: announcements, newSelectedPage: 0, count: count,categId: categId});
+    //             }),
+    //             catchError((err) => {
+    //                 return of(AnnouncementActions.selectCategoryFailure())
+    //             })
+    //         );
+    // searchAnnouncements$ = createEffect(() => this.actions$.pipe(
+    //     ofType(AnnouncementActions.searchAnnouncements),
+    //     withLatestFrom(this.store.select(selectPagesInfo), this.store.select(selectedCategory)),
+    //     switchMap(([{search}, pagesInfo, selectedCateg]) => {
+    //         return this.announcementService.getAnnouncementsPageSearch(0, pagesInfo.itemsPerPage, selectedCateg, search).pipe(
+    //             map(({announcements,count}) => {
+    //                 announcements.forEach(ann => {ann.page = Number(ann.page); ann.datePosted = new Date(ann.datePosted); return ann});
+    //                 return AnnouncementActions.searchAnnouncementsSuccess({items: announcements, newSelectedPage: 0, count: count,categId: selectedCateg, 
+    //                     search: (search === ''? null: search)});
+    //             }),
+    //             catchError((err) => {
+    //                 return of(AnnouncementActions.searchAnnouncementsFailure())
+    //             })
+    //         );
+    //     })
+    // ))
 
     loadingCategories$ = createEffect(() => 
         this.actions$.pipe(

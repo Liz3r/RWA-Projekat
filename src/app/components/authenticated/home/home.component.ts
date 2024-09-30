@@ -40,11 +40,13 @@ export class HomeComponent implements OnInit{
   selectCategory(id: number | null){
     this.store.dispatch(resetCache());
     this.store.dispatch(selectCategory({categId: id}));
+    this.store.dispatch(loadAnnouncementsPageAll({page: 0}));
   }
 
   onSearch(){
     this.store.dispatch(resetCache());
-    this.store.dispatch(searchAnnouncements({search: this.inputVal}))
+    this.store.dispatch(searchAnnouncements({search: this.inputVal}));
+    this.store.dispatch(loadAnnouncementsPageAll({page: 0}));
   }
 
   goToAccountSettings() {
