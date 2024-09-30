@@ -7,6 +7,8 @@ import { Announcement } from '../../../../models/announcement';
 import { from, map, Observable, of, switchMap } from 'rxjs';
 import { selectCategoriesList, selectCurrentPage, selectedCategory } from '../../../store/announcement/announcement.selector';
 import { Category } from '../../../../models/category';
+import { User } from '../../../../models/user';
+import { selectAuthUser } from '../../../store/auth/auth.selector';
 
 
 @Component({
@@ -21,12 +23,14 @@ export class HomeComponent implements OnInit{
   announcements$!: Observable<Announcement[]>;
   allCategories$!: Observable<Category[]>;
   inputVal: string = '';
+  userInfo$!: Observable<User | null>;
 
   ngOnInit(): void {
     this.announcements$ = this.store.select(selectCurrentPage);
     this.store.dispatch(loadAnnouncementsPageAll({page: 0}));
     this.store.dispatch(loadCategories());
     this.allCategories$ = this.store.select(selectCategoriesList);
+    this.userInfo$ = this.store.select(selectAuthUser);
   }
 
   selectCategory(id: number | null){

@@ -145,6 +145,7 @@ footer{
     height: 1px;
     width: 130px;
     background: #ccd8e4;
+    margin-bottom: 10px;
 }
 
 .category-label{
@@ -154,11 +155,11 @@ footer{
     font-weight: 400;
 }
 
-.categ-option{
+.categ-option, .account-option{
     color: rgb(38, 61, 85);
     cursor: pointer;
 }
-.categ-option:hover{
+.categ-option:hover, .account-option:hover{
     background-color: rgba(146, 189, 235, 0.582);
     text-decoration: underline;
 }
