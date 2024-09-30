@@ -26,6 +26,8 @@ import { AnnouncementReducer } from './store/announcement/announcement.reducer';
 import { PageNavComponent } from './components/page-nav/page-nav.component';
 import { AnnouncementComponent } from './components/announcement/announcement.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
+import { AnnouncementDetailsComponent } from './components/announcement-details/announcement-details.component';
+import { announcementDetailsReducer } from './store/announcement-details.ts/announcement-details.reducer';
 
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -46,6 +48,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     PageNavComponent,
     AnnouncementComponent,
     AccountSettingsComponent,
+    AnnouncementDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,12 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     RouterLinkActive,
     ReactiveFormsModule,
     FormsModule,
-    StoreModule.forRoot({serverErrors: serverErrorReducer, auth: authReducer, announcements: AnnouncementReducer}, {metaReducers}),
+    StoreModule.forRoot({
+      serverErrors: serverErrorReducer, 
+      auth: authReducer, 
+      announcements: AnnouncementReducer, 
+      announcementDetails: announcementDetailsReducer
+    }, {metaReducers}),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),

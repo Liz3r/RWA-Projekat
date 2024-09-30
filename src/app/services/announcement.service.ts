@@ -3,6 +3,7 @@ import { Announcement } from '../../models/announcement';
 import { map, Observable, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../env';
+import { AnnouncementDetails } from '../../models/announcement-details';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,9 @@ export class AnnouncementService {
     return this.http.get<{announcements: Announcement[], count: number}>
     (`${API_URL}/announcement/getPageInSearch/${pageNum}/${itemsPerPageNum}/${categoryId}/${srcFix}`,
        {withCredentials: true});
+  }
+
+  getAnnouncementDetails(announcementId: number): Observable<AnnouncementDetails>{
+    return this.http.get<AnnouncementDetails>(`${API_URL}/announcement/${announcementId}`, {withCredentials: true});
   }
 }

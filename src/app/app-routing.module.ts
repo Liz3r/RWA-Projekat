@@ -10,6 +10,7 @@ import { AddAnnouncementComponent } from './components/authenticated/add-announc
 import { credentialsResolver } from './resolvers/credentials.resolver';
 import { AppComponent } from './app.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
+import { AnnouncementDetailsComponent } from './components/announcement-details/announcement-details.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
       {path: 'home', component: HomeComponent},
       {path: 'add', component: AddAnnouncementComponent},
       {path: 'account', component: AccountSettingsComponent},
+      {path: 'announcement/:id', component: AnnouncementDetailsComponent },
       {path: '', redirectTo: 'authenticated/home', pathMatch: 'full'}
     ]
   },
