@@ -28,9 +28,13 @@ export class UserController {
     return this.userService.findOneById(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+  @Patch('update')
+  update(@Body() updateUserDto: UpdateUserDto, @Request() req) {
+    const id = req.payload.id;
+    if(!id)
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    console.log(id);
+    return this.userService.update(id, updateUserDto);
   }
 
   @Delete(':id')

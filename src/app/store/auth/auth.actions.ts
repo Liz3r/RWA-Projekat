@@ -44,6 +44,7 @@ export const invalidToken = createAction(
     '[Auth] Token Invalid'
 )
 
+//GET
 export const loadFullProfile = createAction(
     '[Auth] Get Full Profile'
 )
@@ -55,4 +56,17 @@ export const loadProfileSucceeded = createAction(
 
 export const loadProfileFailed = createAction(
     '[Auth] Failed to Load Profile'
+)
+//UPDATE
+export const updateProfile = createAction(
+    '[Auth] Update Profile',
+    props<{changes: User}>()
+)
+export const updateProfileSucceeded = createAction(
+    '[Auth] Profile Updated',
+    props<{user: User}>()
+)
+
+export const updateProfileFailed = createAction(
+    '[Auth] Failed to Update Profile'
 )

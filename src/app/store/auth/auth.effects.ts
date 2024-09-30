@@ -19,6 +19,28 @@ export class AuthEffects{
         private router: Router
     ) {}
 
+    updateProfile$ = createEffect(() => this.actions$.pipe(
+        ofType(AuthActions.updateProfile),
+        switchMap(({changes}) => this.authService.updateProfile(changes).pipe(
+            map((updatedUser) => {
+                if(updatedUser.hasOwnProperty('address') &&
+                updatedUser.hasOwnProperty('bio') &&
+                updatedUser.hasOwnProperty('city') &&
+                updatedUser.hasOwnProperty('country') &&
+                updatedUser.hasOwnProperty('first_name') &&
+                updatedUser.hasOwnProperty('id') &&
+                updatedUser.hasOwnProperty('last_name') &&
+                updatedUser.hasOwnProperty('phone_number') &&
+                updatedUser.hasOwnProperty('user_email')){
+                        const user: User = {...updatedUser};
+                        return AuthActions.updateProfileSucceeded({user: user});
+                    }
+                    return AuthActions.updateProfileFailed();
+            }),
+            catchError(() => of(AuthActions.updateProfileFailed()))
+        ))
+    ))
+
     loadProfile$ =  createEffect(() => 
         this.actions$.pipe(
             ofType(AuthActions.loadFullProfile),

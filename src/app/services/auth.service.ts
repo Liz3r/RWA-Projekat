@@ -24,6 +24,10 @@ export class AuthService {
     return this.http.post(`${API_URL}/user/register`, createUserDto, { withCredentials: true });
   }
 
+  updateProfile(updatedUser: User){
+    return this.http.patch<User>(`${API_URL}/user/update`, updatedUser, {withCredentials: true});
+  }
+
   loadProfile(){
     return this.http.get<User>(`${API_URL}/user/byId`, {withCredentials: true});
   }
