@@ -1,0 +1,71 @@
+<header>
+    <div class="logo-div">
+        <img (click)="onLogoClick()" src="assets/samplelogo.png" class="logo" alt="logo">
+    </div>
+    <div class="search-div">
+    </div>
+</header>
+
+<div class="new-ann-title">
+    <h3>Account Settings</h3>
+</div>
+
+<form class="content-div" [formGroup]="accountSettingsForm" (submit)="onSubmit()">
+
+    <div class="row">
+        <div class="label-input-form">
+            <label for="firstName">First name</label>
+            <input class="form-input" id="firstName" type="text" formControlName = "first_name">
+        </div>
+        
+        <div class="label-input-form">
+            <label for="lastName">Last name</label>
+            <input class="form-input" id="lastName" type="text" formControlName = "last_name">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="label-input-form">
+            <label for="phone_number">Phone Number</label>
+            <input class="form-input" id="phone_number" type="text" formControlName = "phone_number">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="label-input-form">
+            <label for="country">Country</label>
+            <input class="form-input" id="country" type="text" formControlName = "country">
+        </div>
+        <div class="label-input-form">
+            <label for="city">City</label>
+            <input class="form-input" id="city" type="text" formControlName = "city">
+        </div>
+    </div>
+
+   
+
+    <div class="row">
+        <div class="label-input-form">
+            <label for="address">Address</label>
+            <input class="form-input" id="address" type="text" formControlName = "address">
+        </div>
+    </div>
+    <div class="row">
+        <div class="label-input-form">
+            <label for="bio">Bio</label>
+            <textarea class="form-input" spellcheck="false" id="bio" type="text" formControlName = "bio"></textarea>
+        </div>
+    </div>
+    
+
+    <div class="error-div">
+        <div class="error-msg" *ngIf="errorMsg">{{errorMsg}}</div>
+        <app-server-error></app-server-error>
+    </div>
+
+    <button class="btn btn-green post-btn">Update Profile</button>
+</form>
+
+<footer>
+
+</footer>

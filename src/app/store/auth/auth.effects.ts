@@ -19,6 +19,30 @@ export class AuthEffects{
         private router: Router
     ) {}
 
+    loadProfile$ =  createEffect(() => 
+        this.actions$.pipe(
+            ofType(AuthActions.loadFullProfile),
+            switchMap(() => this.authService.loadProfile().pipe(
+                map((userRes) => {
+                    if(userRes.hasOwnProperty('address') &&
+                    userRes.hasOwnProperty('bio') &&
+                    userRes.hasOwnProperty('city') &&
+                    userRes.hasOwnProperty('country') &&
+                    userRes.hasOwnProperty('first_name') &&
+                    userRes.hasOwnProperty('id') &&
+                    userRes.hasOwnProperty('last_name') &&
+                    userRes.hasOwnProperty('phone_number') &&
+                    userRes.hasOwnProperty('user_email')){
+                        const user: User = {...userRes};
+                        return AuthActions.loadProfileSucceeded({user: user});
+                    }
+                    return AuthActions.loadProfileFailed();
+                }),
+                catchError(() => of(AuthActions.loadProfileFailed()))
+            ))
+        )
+    )
+
     login$ = createEffect(() =>
         this.actions$.pipe(
             ofType(AuthActions.login),

@@ -25,6 +25,7 @@ import { AnnouncementEffects } from './store/announcement/announcement.effects';
 import { AnnouncementReducer } from './store/announcement/announcement.reducer';
 import { PageNavComponent } from './components/page-nav/page-nav.component';
 import { AnnouncementComponent } from './components/announcement/announcement.component';
+import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -44,6 +45,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     AddAnnouncementComponent,
     PageNavComponent,
     AnnouncementComponent,
+    AccountSettingsComponent,
   ],
   imports: [
     BrowserModule,

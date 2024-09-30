@@ -9,6 +9,7 @@ import { HomeComponent } from './components/authenticated/home/home.component';
 import { AddAnnouncementComponent } from './components/authenticated/add-announcement/add-announcement.component';
 import { credentialsResolver } from './resolvers/credentials.resolver';
 import { AppComponent } from './app.component';
+import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
     children: [
       {path: 'home', component: HomeComponent},
       {path: 'add', component: AddAnnouncementComponent},
+      {path: 'account', component: AccountSettingsComponent},
       {path: '', redirectTo: 'authenticated/home', pathMatch: 'full'}
     ]
   },

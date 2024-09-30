@@ -4,7 +4,7 @@ import { AppState } from '../../../store/app-state';
 import { select, Store } from '@ngrx/store';
 import { loadAnnouncementsPageAll, loadCategories, resetCache, searchAnnouncements, selectCategory } from '../../../store/announcement/announcement.actions';
 import { Announcement } from '../../../../models/announcement';
-import { from, map, Observable, of, switchMap } from 'rxjs';
+import { from, map, Observable, of, switchMap, withLatestFrom } from 'rxjs';
 import { selectCategoriesList, selectCurrentPage, selectedCategory } from '../../../store/announcement/announcement.selector';
 import { Category } from '../../../../models/category';
 import { User } from '../../../../models/user';
@@ -22,10 +22,14 @@ export class HomeComponent implements OnInit{
 
   announcements$!: Observable<Announcement[]>;
   allCategories$!: Observable<Category[]>;
+  selectedCategoryId!: number | null;
   inputVal: string = '';
   userInfo$!: Observable<User | null>;
 
   ngOnInit(): void {
+    this.store.select(selectedCategory).subscribe((categ) => {
+      this.selectedCategoryId = categ;
+    })
     this.announcements$ = this.store.select(selectCurrentPage);
     this.store.dispatch(loadAnnouncementsPageAll({page: 0}));
     this.store.dispatch(loadCategories());
@@ -41,6 +45,10 @@ export class HomeComponent implements OnInit{
   onSearch(){
     this.store.dispatch(resetCache());
     this.store.dispatch(searchAnnouncements({search: this.inputVal}))
+  }
+
+  goToAccountSettings() {
+    this.router.navigate(['/authenticated/account'])
   }
 
   onAddNewAnnouncement(){

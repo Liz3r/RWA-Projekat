@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { API_URL } from '../env';
 import { CreateUserDto } from '../dtos/create-user.dto';
+import { User } from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,10 @@ export class AuthService {
 
   register(createUserDto: CreateUserDto){
     return this.http.post(`${API_URL}/user/register`, createUserDto, { withCredentials: true });
+  }
+
+  loadProfile(){
+    return this.http.get<User>(`${API_URL}/user/byId`, {withCredentials: true});
   }
 
   checkToken(){

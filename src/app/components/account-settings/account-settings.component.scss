@@ -1,0 +1,149 @@
+header{
+    height: 78px;
+    border-bottom: 1px solid rgb(212, 212, 212);
+    background-color: rgb(251, 251, 251);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 30px;
+    height: 90px;
+}
+
+.error-div > *{
+    font-weight: 500;
+    font-size: 18px;
+    height: 45px;
+    display: block;
+    margin: auto;
+    color: red;
+}
+
+
+.hidden{
+    display: none;
+}
+
+.img-preview{
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+footer{
+    height: 78px;
+    background-color: black;
+}
+.condition-div{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.condition-inputs{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+//content
+.content-div{
+    margin-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 35px;
+    width: 800px;
+    height: fit-content;
+    border: 1px solid #D4D4D4;
+    border-radius: 5px;
+    background-color: #FBFBFB;
+    padding: 50px;
+}
+.search-div{
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+}
+
+.logo-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-right: 300px;
+}
+
+.logo{
+    width: 100px;
+    height: 45px;
+    margin-bottom: 20px;
+}
+.logo:hover{
+    cursor: pointer;
+}
+//--------------
+
+
+.all-inputs{
+    font-size: 15px;
+    border: 1px solid #8F8F9D;
+    border-radius: 5px;
+    height: 20px;
+    padding-left: 8px;
+    margin-top: 5px;
+}
+
+.post-btn{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+
+    width: 150px;
+    height: 35px;
+}
+
+.all-inputs:focus{
+    outline: rgb(159, 199, 248) solid 1px;
+}
+h3{
+    font-weight: 600;
+}
+
+.new-ann-title{
+    margin-top: 10px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    width: 895px;
+    height: 50px;
+    border: 1px solid #D4D4D4;
+    border-radius: 5px;
+    background-color: #FBFBFB;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+#phone_number{
+    width: 350px;
+}
+#country{
+    width: 350px;
+}
+#city{
+    width: 350px;
+}
+#address{
+    width: 350px;
+}
+
+#bio{
+    height: 200px;
+    resize: none;
+}

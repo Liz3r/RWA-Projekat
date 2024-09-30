@@ -25,5 +25,8 @@ export const authReducer = createReducer(
     on(Actions.registerFailure, (state) => state),
     on(Actions.checkToken, (state) => ({...state, isLoading: true})),
     on(Actions.validToken, (state, {user}) => ({...state, isLoading: false, isAuthenticated: true, user: user})),
-    on(Actions.invalidToken, (state) => ({...state, isLoading: false, isAuthenticated: false, user: null}))
+    on(Actions.invalidToken, (state) => ({...state, isLoading: false, isAuthenticated: false, user: null})),
+    on(Actions.loadFullProfile, (state) => ({...state, isLoading: true})),
+    on(Actions.loadProfileSucceeded, (state, {user}) => ({...state, isLoading: false, user: user})),
+    on(Actions.loadProfileFailed, (state) => ({...state, isLoading: false}))
 )

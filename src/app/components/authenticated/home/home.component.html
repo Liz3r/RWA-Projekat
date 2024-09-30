@@ -16,8 +16,10 @@
         <div class="categories-div">
             <label class="category-label">Category</label>
             <div class="horizontal-separator"></div>
-            <div (click)="selectCategory(null)" class="categ-option">All</div>
-            <div *ngFor="let categ of allCategories$ | async" (click)="selectCategory(categ.id)" class="categ-option">{{categ.title}}</div>
+            <div (click)="selectCategory(null)" 
+            [class]="'categ-option '+(selectedCategoryId? '':'selected-categ')">All</div>
+            <div *ngFor="let categ of allCategories$ | async" (click)="selectCategory(categ.id)" 
+            [class]="'categ-option ' + ((selectedCategoryId && (categ.id == selectedCategoryId))? 'selected-categ':'')">{{categ.title}}</div>
         </div>
     </div>
     <div class="main-div">
@@ -31,10 +33,10 @@
         <div class="account-div">
             <label class="account-label">Account</label>
             <div class="horizontal-separator"></div>
-            <label *ngIf="userInfo$ | async as user">User: {{user.first_name}}</label>
+            <label *ngIf="userInfo$ | async as user"><i class="fas fa-user"></i> {{user.first_name}}</label>
             <label *ngIf="userInfo$ | async as user">{{user.user_email}}</label>
             <div class="horizontal-separator"></div>
-            <div class="account-option"><i class="fas fa-gear"></i> Account settings</div>
+            <div class="account-option" (click)="goToAccountSettings()"><i class="fas fa-gear"></i> Account settings</div>
             <div class="account-option"><i class="fas fa-right-from-bracket"></i> Logout</div>
         </div>
     </div>  

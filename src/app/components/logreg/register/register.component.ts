@@ -6,6 +6,7 @@ import { CreateUserDto } from '../../../dtos/create-user.dto';
 import { Store } from '@ngrx/store';
 import * as Actions from '../../../store/server-errors/server-errors.actions';
 import { register } from '../../../store/auth/auth.actions';
+import { AppState } from '../../../store/app-state';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent {
 
 
   constructor(
-    private store: Store
+    private store: Store<AppState>
   ){}
 
   errorMsg: string | null = null;
