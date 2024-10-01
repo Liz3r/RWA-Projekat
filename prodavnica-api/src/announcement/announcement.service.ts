@@ -36,29 +36,31 @@ export class AnnouncementService {
     if(!announcement.user)
       throw new HttpException('User no longer exists', HttpStatus.NOT_FOUND);
     
-    let announcementDetailed: AnnouncementDetailsDto;
-    //informacije o korisniku koji je postavio objavu
-    announcementDetailed.user_firstname = announcement.user.first_name;
-    announcementDetailed.user_lastname = announcement.user.last_name;
-    announcementDetailed.user_email = announcement.user.user_email;
-    announcementDetailed.user_phone_number = announcement.user.phone_number;
-    announcementDetailed.user_country = announcement.user.country;
-    announcementDetailed.user_city = announcement.user.city;
-    announcementDetailed.user_address = announcement.user.address;
-    announcementDetailed.user_bio = announcement.user.bio;
-    //naziv kategorije
-    announcementDetailed.category = announcement.category.categoryTitle;
-    //informacije o objavi
-    announcementDetailed.id = announcement.id;
-    announcementDetailed.title = announcement.title;
-    announcementDetailed.condition = announcement.condition;
-    announcementDetailed.currency = announcement.currency;
-    announcementDetailed.datePosted = announcement.datePosted;
-    announcementDetailed.description = announcement.description;
-    announcementDetailed.price = announcement.price;
-    announcementDetailed.picture = announcement.picture;
+    const announcementDetailed: AnnouncementDetailsDto = {
+      //info o korisniku
+      user_firstname: announcement.user.first_name,
+      user_lastname: announcement.user.last_name,
+      user_email: announcement.user.user_email,
+      user_phone_number: announcement.user.phone_number,
+      user_country: announcement.user.country,
+      user_city: announcement.user.city,
+      user_address: announcement.user.address,
+      user_bio: announcement.user.bio,
+      //kategorija
+      category: announcement.category.categoryTitle,
+      //osnovni info o oglasu
+      id: announcement.id,
+      title: announcement.title,
+      condition: announcement.condition,
+      currency: announcement.currency,
+      datePosted: announcement.datePosted,
+      description: announcement.description,
+      price: announcement.price,
+      picture: announcement.picture
+    }
+    
 
-    return announcement;
+    return announcementDetailed;
   }
 
   async create(body: CreateAnnouncementDto, userId: number, fileUrl: string) {

@@ -16,3 +16,7 @@ export const loadAnnouncementDetailsSucceeded = createAction(
 export const loadAnnouncementDetailsFailed = createAction(
     '[Announcement Details] Load Details Failed'
 )
+
+export const clearDetailsSelection = createAction(
+    '[Announcement Details] Clear Selection'
+)

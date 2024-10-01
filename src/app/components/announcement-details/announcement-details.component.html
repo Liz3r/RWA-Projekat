@@ -5,3 +5,44 @@
     <div class="search-div">
     </div>
 </header>
+
+
+<div *ngIf="announcement" class="content-div">
+    <div class="category-div">
+        {{announcement.category}}
+    </div>
+    <div class="h-separator"></div>
+
+    <div class="img-and-user">
+        <img [src]="announcement.picture" class="img"/>
+        <div class="w-separator"></div>
+        <div class="user-info">
+            <label class="user-flname">{{announcement.user_firstname + "  " + announcement.user_lastname}}</label>
+            <label class="address-title">Address:</label>
+            <label class="city">{{announcement.user_city}}</label>
+            <label class="address">{{announcement.user_address}}</label>
+            <label class="country-title">Country:</label>
+            <label class="country">{{announcement.user_country}}</label>
+            <label class="email-title">Email:</label>
+            <label class="email">{{announcement.user_email}}</label>
+            <label class="phone-title">Phone number:</label>
+            <label class="phone">{{announcement.user_phone_number}}</label>
+            <button class="btn contact-btn" [disabled]="true">Send Email</button>
+        </div>
+    </div>
+    <div class="under-img-div">
+        <h3 class="item-title">{{announcement.title}}</h3>
+        <label class="price">{{announcement.price + " " + announcement.currency}}</label>
+        <div class="h-separator"></div>
+        <div class="condition-date-div">
+            <label>Condition:  {{announcement.condition}}</label>
+            <label class="date-lab">Date Posted: {{getDateString(announcement.datePosted)}}</label>
+        </div>
+        <div class="h-separator"></div>
+    </div>
+    <div class="description" style="white-space: pre-line;">
+        {{announcement.description}}
+    </div>
+</div>
+
+<app-server-error class="server-error"></app-server-error>

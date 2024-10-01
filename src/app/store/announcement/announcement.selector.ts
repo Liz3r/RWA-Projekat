@@ -34,3 +34,7 @@ export const selectCurrentPage = createSelector(
     .filter((ann) => (ann?.page === annState.pagesInfo.selectedPage)? <Announcement>ann : false) // selektuju se samo entiteti aktivne stranice
 )
 
+export const selectedPage = createSelector(
+    selectAnnouncementFeature,
+    (annState) => annState.pagesInfo.selectedPage
+)

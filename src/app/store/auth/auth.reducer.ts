@@ -21,6 +21,7 @@ export const authReducer = createReducer(
     on(Actions.login, (state) => ({...state, isLoading: true})),
     on(Actions.loginSuccess, (state, {user}) => ({...state, user: user, isLoading: false, isAuthenticated: true})),
     on(Actions.loginFailure, (state) => ({...state, isLoading: false, isAuthenticated: false, user: null})),
+    on(Actions.logout, (state) => { document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; return {...state, isAuthenticated: false, user: null}}),
     //register
     on(Actions.register, (state) => state),
     on(Actions.registerSuccess, (state) => state),

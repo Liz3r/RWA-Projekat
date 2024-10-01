@@ -18,6 +18,10 @@ export const loginFailure = createAction(
     '[Auth] Login Failure'
 );
 
+export const logout = createAction(
+    '[Auth] Logout' 
+)
+
 export const register = createAction(
     '[Auth] Register',
     props<{createUserDto: CreateUserDto}>()

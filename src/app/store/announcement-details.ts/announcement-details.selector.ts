@@ -8,3 +8,8 @@ export const selectAnnouncementDetails = createSelector(
     selectAnnouncementDetailsFeature,
     (announcementDetailsFeature) => announcementDetailsFeature.announcementDetails
 )
+
+export const selectIsLoadingAnnouncementDetails = createSelector(
+    selectAnnouncementDetailsFeature,
+    (announcementDetailsFeature) => announcementDetailsFeature.isLoading
+)

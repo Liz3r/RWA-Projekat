@@ -16,5 +16,6 @@ export const announcementDetailsReducer = createReducer(
     InitAnnouncementDetailsState,
     on(Actions.loadAnnouncementDetails, (state) => ({...state, isLoading: true})),
     on(Actions.loadAnnouncementDetailsSucceeded, (state, {announcementDetails}) => ({...state, isLoading: false, announcementDetails})),
-    on(Actions.loadAnnouncementDetailsFailed, (state) => ({...state, isLoading: false}))
+    on(Actions.loadAnnouncementDetailsFailed, (state) => ({...state, isLoading: false})),
+    on(Actions.clearDetailsSelection, (state) => ({...state, announcementDetails: null, isLoading: false}))
 )
