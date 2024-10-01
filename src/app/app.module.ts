@@ -29,6 +29,7 @@ import { AccountSettingsComponent } from './components/account-settings/account-
 import { AnnouncementDetailsComponent } from './components/announcement-details/announcement-details.component';
 import { announcementDetailsReducer } from './store/announcement-details.ts/announcement-details.reducer';
 import { AnnouncementDetailsEffects } from './store/announcement-details.ts/announcement-details.effects';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -50,6 +51,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     AnnouncementComponent,
     AccountSettingsComponent,
     AnnouncementDetailsComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { credentialsResolver } from './resolvers/credentials.resolver';
 import { AppComponent } from './app.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { AnnouncementDetailsComponent } from './components/announcement-details/announcement-details.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
     path: '', 
     component: AppComponent,
     resolve: {credentials: credentialsResolver}
+  },
+  {
+    path: '**', 
+    component: NotFoundComponent
   }
   
 ];
