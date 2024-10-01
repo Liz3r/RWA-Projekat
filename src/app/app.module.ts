@@ -30,6 +30,7 @@ import { AnnouncementDetailsComponent } from './components/announcement-details/
 import { announcementDetailsReducer } from './store/announcement-details.ts/announcement-details.reducer';
 import { AnnouncementDetailsEffects } from './store/announcement-details.ts/announcement-details.effects';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { serverMessageReducer } from './store/server-success/server-success.reducer';
 
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -64,7 +65,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       serverErrors: serverErrorReducer, 
       auth: authReducer, 
       announcements: AnnouncementReducer, 
-      announcementDetails: announcementDetailsReducer
+      announcementDetails: announcementDetailsReducer,
+      serverMessage: serverMessageReducer
     }, {metaReducers}),
     StoreDevtoolsModule.instrument({
       maxAge: 25

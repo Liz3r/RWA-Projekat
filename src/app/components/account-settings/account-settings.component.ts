@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { atozString, isNumber } from '../../../helpers/customValidators';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { User } from '../../../models/user';
 import { AppState } from '../../store/app-state';
 import { Store } from '@ngrx/store';
@@ -10,23 +10,29 @@ import { selectAuthUser } from '../../store/auth/auth.selector';
 import { loadFullProfile } from '../../store/auth/auth.actions';
 import { checkErrors } from '../../../helpers/validationErrorMessage';
 import * as AuthActions from '../../store/auth/auth.actions';
+import { selectServerMessage } from '../../store/server-success/server-success.selector';
 
 @Component({
   selector: 'app-account-settings',
   templateUrl: './account-settings.component.html',
   styleUrl: './account-settings.component.scss'
 })
-export class AccountSettingsComponent implements OnInit{
+export class AccountSettingsComponent implements OnInit, OnDestroy{
   
   
   errorMsg: string | null = '';
   userInfo: User | null = null;
+  serverMessage: string | null = '';
+
+  srvMsgSubscription!: Subscription;
+  getUserSubscription!: Subscription;
   
   constructor(private router: Router, private store: Store<AppState>) {
     
   }
+  
   ngOnInit(): void {
-    this.store.select(selectAuthUser).subscribe((user) =>{
+    this.getUserSubscription = this.store.select(selectAuthUser).subscribe((user) =>{
       if(user){
         const phone_number = user.phone_number? (user.phone_number !== "null"? user.phone_number : '') : '';
         const country = user.country? (user.country !== 'null'? user.country : '') : '';
@@ -41,7 +47,13 @@ export class AccountSettingsComponent implements OnInit{
         this.userInfo = {...user, first_name, phone_number, country, city, address, bio };
       }
     });
+    this.srvMsgSubscription = this.store.select(selectServerMessage).subscribe((msg) => { this.serverMessage = msg });
     this.store.dispatch(loadFullProfile());
+  }
+
+  ngOnDestroy(): void {
+    this.srvMsgSubscription.unsubscribe();
+    this.getUserSubscription.unsubscribe();
   }
   
   accountSettingsForm = new FormGroup({
@@ -58,18 +70,6 @@ export class AccountSettingsComponent implements OnInit{
   onLogoClick() {
     this.router.navigate(['authenticated/home']);
   }
-//   export interface User{
-//     id: number;
-//     user_email: string;
-//     first_name: string;
-//     last_name?: string;
-//     bio?: string;
-//     phone_number?: string;
-//     country?: string;
-//     city?: string;
-//     address?: string;
-// }
-
 
   onSubmit() {
     this.errorMsg = checkErrors(this.accountSettingsForm);

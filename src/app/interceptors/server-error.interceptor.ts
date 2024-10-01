@@ -9,6 +9,7 @@ import { selectIsAuthenticated } from '../store/auth/auth.selector';
 import { Router } from '@angular/router';
 import { AppState } from '../store/app-state';
 import { selectCurrentErrorMessage } from '../store/server-errors/server-errors.selector';
+import { clearMessage } from '../store/server-success/server-success.actions';
 
 
 @Injectable()
@@ -32,6 +33,7 @@ export class ServerErrorInterceptor implements HttpInterceptor{
       if(response.status !== 200)
         this.store.dispatch(ServerErrorActions.setError({status: response.status, message: response.error.message}));
       if(response.status === 401){
+        this.store.dispatch(clearMessage());
         this.store.dispatch(AuthActions.invalidToken());
         this.router.navigate(['account/login']);
       }

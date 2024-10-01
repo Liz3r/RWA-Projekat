@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { from, map, Observable, of, switchMap, take } from 'rxjs';
+import { from, map, Observable, of, Subscription, switchMap, take } from 'rxjs';
 import { AppState } from '../../../store/app-state';
 import { Store } from '@ngrx/store';
 import { Category } from '../../../../models/category';
@@ -11,18 +11,22 @@ import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../../../env';
 import { selectCategoriesList } from '../../../store/announcement/announcement.selector';
 import { loadCategories, resetCache } from '../../../store/announcement/announcement.actions';
+import { clearMessage, setMessage } from '../../../store/server-success/server-success.actions';
+import { selectServerMessage } from '../../../store/server-success/server-success.selector';
 
 @Component({
   selector: 'app-add-announcement',
   templateUrl: './add-announcement.component.html',
   styleUrl: './add-announcement.component.scss'
 })
-export class AddAnnouncementComponent implements OnInit{
+export class AddAnnouncementComponent implements OnInit, OnDestroy{
   
   allCategories$!: Observable<Category[]>;
   errMsg: string | null = '';
   file!: File | null;
   pictureData: string | null = null;
+  serverMessage!: string | null;
+  srvMsgSubscription!: Subscription;
   
   constructor(private router:Router, private store: Store<AppState>, private http: HttpClient){
     
@@ -30,6 +34,10 @@ export class AddAnnouncementComponent implements OnInit{
   ngOnInit(): void {
     this.store.dispatch(loadCategories());
     this.allCategories$ = this.store.select(selectCategoriesList);
+    this.srvMsgSubscription = this.store.select(selectServerMessage).subscribe((msg) => {this.serverMessage = msg});
+  }
+  ngOnDestroy(): void {
+    this.srvMsgSubscription.unsubscribe();
   }
 
   newAnnouncementForm = new FormGroup({
@@ -107,11 +115,13 @@ export class AddAnnouncementComponent implements OnInit{
         this.newAnnouncementForm.reset();
         this.pictureData = null;
         this.store.dispatch(resetCache());
+        this.store.dispatch(setMessage({message: 'Announcement posted'}));
       });
     }
   }
 
   onLogoClick(){
+    this.store.dispatch(clearMessage());
     this.router.navigate(['authenticated/home']);
   }
 }

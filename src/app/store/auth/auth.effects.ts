@@ -8,6 +8,7 @@ import { Store } from "@ngrx/store";
 import { Router } from "@angular/router";
 import { selectIsAuthenticated } from "./auth.selector";
 import { AppState } from "../app-state";
+import { setMessage } from "../server-success/server-success.actions";
 
 @Injectable()
 export class AuthEffects{
@@ -23,6 +24,7 @@ export class AuthEffects{
         ofType(AuthActions.updateProfile),
         switchMap(({changes}) => this.authService.updateProfile(changes).pipe(
             map((updatedUser) => {
+                console.log(updatedUser);
                 if(updatedUser.hasOwnProperty('address') &&
                 updatedUser.hasOwnProperty('bio') &&
                 updatedUser.hasOwnProperty('city') &&
@@ -33,6 +35,7 @@ export class AuthEffects{
                 updatedUser.hasOwnProperty('phone_number') &&
                 updatedUser.hasOwnProperty('user_email')){
                         const user: User = {...updatedUser};
+                        this.store.dispatch(setMessage({message: 'Profile updated'}));
                         return AuthActions.updateProfileSucceeded({user: user});
                     }
                     return AuthActions.updateProfileFailed();
@@ -90,7 +93,7 @@ export class AuthEffects{
             ofType(AuthActions.register),
             switchMap(({createUserDto}) => 
                 this.authService.register(createUserDto).pipe(
-                    map(() => AuthActions.registerSuccess()),
+                    map(() => {this.router.navigate(['account/login']); return AuthActions.registerSuccess()}),
                     catchError(() => of(AuthActions.registerFailure()))
                 )
             )
@@ -113,16 +116,5 @@ export class AuthEffects{
             )
         )
     ))
-
-    // redirectOnAuthChange$ = createEffect(() => this.store.select(selectIsAuthenticated).pipe(
-    //     distinctUntilChanged(),
-    //     tap((isAuth) => {
-            
-    //         if(isAuth && !this.router.url.startsWith("/authenticated"))
-    //             this.router.navigate(["/authenticated/home"]);
-    //         else if(isAuth && !this.router.url.startsWith("/account"))
-    //             this.router.navigate(["/account/login"]);
-    //     })
-    // ), { dispatch: false});
 
 }

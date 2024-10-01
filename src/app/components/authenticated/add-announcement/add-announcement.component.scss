@@ -68,7 +68,11 @@ footer{
     flex-direction: row;
     width: 600px;
 }
-
+.server-message{
+    color: rgb(42, 190, 37);
+    text-align: center;
+    font-size: 18px;
+}
 .logo-div{
     display: flex;
     justify-content: center;
@@ -135,8 +139,13 @@ footer{
 
     width: 150px;
     height: 35px;
-}
 
+    background-color: #00679E;
+    border-color: rgb(159, 199, 248);
+}
+.post-btn:hover{
+    background-color: #1684be;
+}
 .title-input{
     width: 400px;
 }

@@ -12,7 +12,7 @@ const  cachedPagesCount = 2;
 export const InitCacheInfo: CacheInfo = {
     presentPages: new Array(cachedPagesCount).fill(null),
     lastPageIndex: 0,
-    itemsPerPage: 2,
+    itemsPerPage: 6,
     cachedPagesLimit: cachedPagesCount,
     selectedPage: 0,
     totalItems: null

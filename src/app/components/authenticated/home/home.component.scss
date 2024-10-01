@@ -12,7 +12,11 @@ footer{
     height: 78px;
     background-color: black;
 }
-
+.bottom-nav{
+    position: absolute;
+    bottom: 0px;
+    width: 702px;
+}
 //content
 .content-div{
     display: flex;
@@ -25,11 +29,16 @@ footer{
     flex: 0.5;
     justify-content: end;
 }
+footer{
+    margin-top: 100px;
+}
 .main-div{
+    position: relative;
     display: flex;
     flex-direction: column;
    
-    height: 100vh;
+    min-height: 100vh;
+    height: fit-content;
     width: 702px;
 }
 .right-div{

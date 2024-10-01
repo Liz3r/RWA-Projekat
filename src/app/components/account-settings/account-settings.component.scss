@@ -63,6 +63,13 @@ footer{
     background-color: #FBFBFB;
     padding: 50px;
 }
+
+.server-message{
+    color: rgb(42, 190, 37);
+    text-align: center;
+    font-size: 18px;
+}
+
 .search-div{
     display: flex;
     flex-direction: row;
@@ -105,6 +112,12 @@ footer{
 
     width: 150px;
     height: 35px;
+
+    background-color: #00679E;
+    border-color: rgb(159, 199, 248);
+}
+.post-btn:hover{
+    background-color: #1684be;
 }
 
 .all-inputs:focus{
