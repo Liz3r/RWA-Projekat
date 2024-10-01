@@ -27,6 +27,9 @@
         <div *ngFor="let ann of announcements$ | async">
             <app-announcement  [announcement]="ann"></app-announcement>
         </div>
+        <div *ngIf="entityCount == 0" class="no-items">
+            No items found
+        </div>
         <!--<div *ngIf="" class="no-items">No items found</div>-->
     </div> 
     <div class="right-div">

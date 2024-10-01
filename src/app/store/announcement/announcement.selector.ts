@@ -38,3 +38,8 @@ export const selectedPage = createSelector(
     selectAnnouncementFeature,
     (annState) => annState.pagesInfo.selectedPage
 )
+
+export const selectAllEntities = createSelector(
+    selectAnnouncementFeature,
+    adapter.getSelectors().selectAll
+)

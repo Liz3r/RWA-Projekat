@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { loadAnnouncementsPageAll, loadCategories, resetCache, searchAnnouncements, selectCategory } from '../../../store/announcement/announcement.actions';
 import { Announcement } from '../../../../models/announcement';
 import { from, map, Observable, of, Subscriber, Subscription, switchMap, withLatestFrom } from 'rxjs';
-import { selectCategoriesList, selectCurrentPage, selectedCategory, selectedPage } from '../../../store/announcement/announcement.selector';
+import { selectAllEntities, selectCategoriesList, selectCurrentPage, selectedCategory, selectedPage } from '../../../store/announcement/announcement.selector';
 import { Category } from '../../../../models/category';
 import { User } from '../../../../models/user';
 import { selectAuthUser } from '../../../store/auth/auth.selector';
@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy{
   selectedCategoryId!: number | null;
   inputVal: string = '';
   userInfo$!: Observable<User | null>;
+  entityCount: number = 1;
 
   selectedPageSubscriber!: Subscription;
 
@@ -39,7 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy{
       this.store.dispatch(loadAnnouncementsPageAll({page: page}));
     })
     
-    
+    this.store.select(selectAllEntities).subscribe((allEntites) => {this.entityCount = allEntites.length})
     this.store.dispatch(loadCategories());
     this.allCategories$ = this.store.select(selectCategoriesList);
     this.userInfo$ = this.store.select(selectAuthUser);
