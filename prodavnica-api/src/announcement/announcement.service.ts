@@ -79,6 +79,14 @@ export class AnnouncementService {
     if(!userExists)
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
 
+    if(!userExists.first_name || userExists.first_name == null || userExists.first_name === 'null',
+      !userExists.last_name || userExists.last_name == null || userExists.last_name === 'null',
+      !userExists.phone_number || userExists.phone_number == null || userExists.phone_number === 'null',
+      !userExists.country || userExists.country == null || userExists.country === 'null',
+      !userExists.city || userExists.city == null || userExists.city === 'null',
+      !userExists.address || userExists.address == null || userExists.address === 'null')
+      throw new HttpException('Please finish setting up your account before posting', HttpStatus.FORBIDDEN);
+
     const currentDate = new Date(Date.now());
     const announcement = new Announcement();
 
