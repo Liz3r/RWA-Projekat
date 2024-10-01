@@ -31,6 +31,7 @@ export class AnnouncementService {
   }
 
   getAnnouncementDetails(announcementId: number): Observable<AnnouncementDetails>{
-    return this.http.get<AnnouncementDetails>(`${API_URL}/announcement/${announcementId}`, {withCredentials: true});
+    console.log(announcementId);
+    return this.http.get<AnnouncementDetails>(`${API_URL}/announcement/details/${announcementId}`, {withCredentials: true});
   }
 }

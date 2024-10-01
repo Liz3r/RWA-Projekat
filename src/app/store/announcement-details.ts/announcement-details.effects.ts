@@ -10,7 +10,7 @@ import * as AnnouncementDetailsActions from './announcement-details.actions';
 
 
 @Injectable()
-export class AnnouncementEffects{
+export class AnnouncementDetailsEffects{
 
     constructor(
         private actions$: Actions,

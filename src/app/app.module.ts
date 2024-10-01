@@ -28,6 +28,7 @@ import { AnnouncementComponent } from './components/announcement/announcement.co
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { AnnouncementDetailsComponent } from './components/announcement-details/announcement-details.component';
 import { announcementDetailsReducer } from './store/announcement-details.ts/announcement-details.reducer';
+import { AnnouncementDetailsEffects } from './store/announcement-details.ts/announcement-details.effects';
 
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -66,7 +67,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
-    EffectsModule.forRoot([AuthEffects, AnnouncementEffects]),
+    EffectsModule.forRoot([AuthEffects, AnnouncementEffects, AnnouncementDetailsEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     })

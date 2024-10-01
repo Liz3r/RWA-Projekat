@@ -1,20 +1,20 @@
 
 export interface AnnouncementDetails {
-    title: string
-    category: number
-    condition: string
-    currency: string
-    datePosted: Date
-    price: number
-    description: string
-    picture: string
-
+    id: number;
+    title: string;
+    condition: string;
+    currency: string;
+    datePosted: Date;
+    price: number;
+    description: string;
+    picture: string;
+    category: string;
     user_email: string;
-    first_name: string;
-    last_name?: string;
-    bio?: string;
-    phone_number?: string;
-    country?: string;
-    city?: string;
-    address?: string;
+    user_firstname: string;
+    user_lastname: string;
+    user_bio: string;
+    user_phone_number: string;
+    user_country: string;
+    user_city: string;
+    user_address: string;
 }

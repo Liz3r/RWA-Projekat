@@ -9,6 +9,7 @@ import { UserService } from 'src/user/user.service';
 import { Category } from 'src/category/entities/category.entity';
 import { User } from 'src/user/entities/user.entity';
 import { RetAnnouncementDto } from './dto/return-announcement.dto';
+import { AnnouncementDetailsDto } from './dto/announcement-details.dto';
 
 @Injectable()
 export class AnnouncementService {
@@ -18,6 +19,47 @@ export class AnnouncementService {
     private announcementRepository: Repository<Announcement>,
     private userService: UserService
   ){}
+
+  
+  async getAnnouncementDetails(announcementId: number){
+    const announcement = await this.announcementRepository
+    .createQueryBuilder('announcement')
+    .leftJoinAndSelect('announcement.user', 'user')
+    .leftJoinAndSelect('announcement.category', 'category')
+    .where('announcement.id = :id', { id: announcementId })
+    .getOne();
+
+    if(!announcement)
+      throw new HttpException('Item not found', HttpStatus.NOT_FOUND);
+    if(!announcement.category)
+      throw new HttpException('Invalid announcement', HttpStatus.NOT_FOUND);
+    if(!announcement.user)
+      throw new HttpException('User no longer exists', HttpStatus.NOT_FOUND);
+    
+    let announcementDetailed: AnnouncementDetailsDto;
+    //informacije o korisniku koji je postavio objavu
+    announcementDetailed.user_firstname = announcement.user.first_name;
+    announcementDetailed.user_lastname = announcement.user.last_name;
+    announcementDetailed.user_email = announcement.user.user_email;
+    announcementDetailed.user_phone_number = announcement.user.phone_number;
+    announcementDetailed.user_country = announcement.user.country;
+    announcementDetailed.user_city = announcement.user.city;
+    announcementDetailed.user_address = announcement.user.address;
+    announcementDetailed.user_bio = announcement.user.bio;
+    //naziv kategorije
+    announcementDetailed.category = announcement.category.categoryTitle;
+    //informacije o objavi
+    announcementDetailed.id = announcement.id;
+    announcementDetailed.title = announcement.title;
+    announcementDetailed.condition = announcement.condition;
+    announcementDetailed.currency = announcement.currency;
+    announcementDetailed.datePosted = announcement.datePosted;
+    announcementDetailed.description = announcement.description;
+    announcementDetailed.price = announcement.price;
+    announcementDetailed.picture = announcement.picture;
+
+    return announcement;
+  }
 
   async create(body: CreateAnnouncementDto, userId: number, fileUrl: string) {
     if(!body.title || !body.category || !body.condition || !body.currency || !body.description || !body.price || 

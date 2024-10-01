@@ -53,6 +53,10 @@ export class AnnouncementController {
     return this.announcementService.findPageInSearchWithCategory(page, pageSize, categ, search);
   }
 
+  @Get('details/:id')
+  getAnnouncementDetails(@Param('id') id: number){
+    return this.announcementService.getAnnouncementDetails(id);
+  }
 
 
   @Get(':id')

@@ -7,7 +7,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
 import { Announcement } from "../../../models/announcement";
 
 //---------pomocna struktura za rad sa kesiranjem stranica
-const  cachedPagesCount = 5;
+const  cachedPagesCount = 2;
 
 export const InitCacheInfo: CacheInfo = {
     presentPages: new Array(cachedPagesCount).fill(null),
@@ -47,7 +47,7 @@ export const AnnouncementReducer = createReducer(
         (state, {items, newSelectedPage, count}) => {
             let newPagesInfo: CacheInfo = {...state.pagesInfo };
             newPagesInfo.selectedPage = newSelectedPage;
-            if(newPagesInfo.lastPageIndex >= newPagesInfo.cachedPagesLimit)
+            if(newPagesInfo.lastPageIndex >= (newPagesInfo.cachedPagesLimit-1))
                 newPagesInfo.lastPageIndex = 0;
             else
                 newPagesInfo.lastPageIndex = newPagesInfo.lastPageIndex+1;
